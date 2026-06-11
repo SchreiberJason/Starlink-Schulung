@@ -27,11 +27,14 @@
   function sortNum(arr){ return arr.slice().sort(function(a,b){ return a-b; }); }
   function context(){
     var p = new URLSearchParams(location.search);
+    var low = {};
+    p.forEach(function(v,k){ low[k.toLowerCase()] = v; });
+    function g(name){ return p.get(name) || low[name.toLowerCase()] || ""; }
     return {
-      workerUuid:  p.get("wxWorkerUuid")       || "",
-      taskUuid:    p.get("wxAssignedTaskUuid") || "",
-      flowUuid:    p.get("wxTaskFlowUuid")     || "",
-      companyUuid: p.get("wxCompanyUuid")      || ""
+      workerUuid:  g("wxWorkerUuid"),
+      taskUuid:    g("wxAssignedTaskUuid"),
+      flowUuid:    g("wxTaskFlowUuid"),
+      companyUuid: g("wxCompanyUuid")
     };
   }
 

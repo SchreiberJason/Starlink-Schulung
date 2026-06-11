@@ -1,17 +1,21 @@
 /**
  * Helferline – Quiz-Endpunkt für Google Sheets
  * =================================================
- * Nimmt Quiz-Antworten per POST entgegen und schreibt eine Zeile in das Tabellenblatt "Antworten".
+ * Nimmt Quiz-Antworten per POST entgegen und schreibt sie in das Tabellenblatt.
  *
- * EINRICHTUNG
- * 1. Neue Google-Tabelle anlegen: https://sheets.new  (z. B. "Starlink-Schulung – Quizantworten")
- * 2. Erweiterungen -> Apps Script. Den gesamten Inhalt dieser Datei einfügen, speichern.
- * 3. (Optional) SECRET unten setzen und im Quiz (window.QUIZ.secret) denselben Wert eintragen.
- * 4. Bereitstellen -> Neue Bereitstellung -> Typ "Web-App":
- *        Ausführen als:        Ich
- *        Zugriff durch:        Alle (auch anonym)
- *    Bereitstellen, Zugriff autorisieren.
- * 5. Die Web-App-URL (endet auf /exec) kopieren und mir geben bzw. in window.QUIZ.endpoint eintragen.
+ * NEU in dieser Version:
+ *  - eine eigene Registerkarte (Tab) PRO QUIZ (Name = Modul)
+ *  - eine Spalte PRO FRAGE (Antwort des Technikers, mit ✓ / ✗)
+ *  - Spalten für die benötigte Zeit (Sekunden + mm:ss)
+ *
+ * EINRICHTUNG / AKTUALISIERUNG
+ * 1. Erweiterungen -> Apps Script. Den GESAMTEN bisherigen Code löschen
+ *    und diesen hier einfügen, speichern.
+ * 2. Bereitstellen -> Bereitstellungen verwalten -> ✏️ Bearbeiten
+ *    -> Version: "Neue Version" -> Bereitstellen. (Die /exec-URL bleibt gleich.)
+ *    Zugriff durch: "Alle" / Ausführen als: "Ich".
+ * 3. Die alten Test-Zeilen/Tabs kannst du löschen. Neue Tabs + Kopfzeilen
+ *    legt das Script bei der ersten Einsendung je Quiz automatisch an.
  */
 
 // Optionaler Schutz gegen Fremd-POSTs. Leer lassen = kein Check.
@@ -24,18 +28,26 @@ function doPost(e) {
 
     var data = JSON.parse(e.postData.contents);
     if (SECRET && data.secret !== SECRET) {
-      return ContentService.createTextOutput(JSON.stringify({ ok: false, error: "unauthorized" }))
-        .setMimeType(ContentService.MimeType.JSON);
+      return out({ ok: false, error: "unauthorized" });
     }
 
     var ss = SpreadsheetApp.getActiveSpreadsheet();
-    var sheet = ss.getSheetByName("Antworten") || ss.insertSheet("Antworten");
+    var tabName = sanitizeTabName(data.module || "Antworten");
+    var sheet = ss.getSheetByName(tabName) || ss.insertSheet(tabName);
+
+    var answers = data.answers || [];
+
+    var base = ["Zeitstempel", "Modul", "WorkerUUID", "TaskUUID", "FlowUUID", "CompanyUUID",
+                "Punktzahl", "Gesamt", "Prozent", "Bestanden", "Dauer (Sek.)", "Dauer (mm:ss)"];
+
+    // Kopfzeile beim ersten Schreiben anlegen: feste Spalten + eine Spalte je Frage
     if (sheet.getLastRow() === 0) {
-      sheet.appendRow(["Zeitstempel", "Modul", "WorkerUUID", "TaskUUID", "FlowUUID", "CompanyUUID",
-                       "Punktzahl", "Gesamt", "Prozent", "Bestanden",
-                       "Dauer (Sek.)", "Dauer (mm:ss)", "Antworten (JSON)"]);
+      var qHeaders = answers.map(function (a, i) { return "F" + (i + 1) + ": " + (a.q || ""); });
+      sheet.appendRow(base.concat(qHeaders));
+      sheet.setFrozenRows(1);
     }
-    sheet.appendRow([
+
+    var row = [
       new Date(),
       data.module || "",
       data.workerUuid || "",
@@ -47,16 +59,27 @@ function doPost(e) {
       data.percent != null ? data.percent : "",
       data.passed ? "ja" : "nein",
       data.durationSec != null ? data.durationSec : "",
-      data.duration || "",
-      JSON.stringify(data.answers || [])
-    ]);
+      data.duration || ""
+    ];
+    // je Frage eine Spalte: gegebene Antwort, mit ✓ (richtig) bzw. ✗ (falsch)
+    var answerCells = answers.map(function (a) {
+      return (a.ok ? "✓ " : "✗ ") + (a.given || "");
+    });
 
-    return ContentService.createTextOutput(JSON.stringify({ ok: true }))
-      .setMimeType(ContentService.MimeType.JSON);
+    sheet.appendRow(row.concat(answerCells));
+    return out({ ok: true });
   } catch (err) {
-    return ContentService.createTextOutput(JSON.stringify({ ok: false, error: String(err) }))
-      .setMimeType(ContentService.MimeType.JSON);
+    return out({ ok: false, error: String(err) });
   } finally {
     lock.releaseLock();
   }
+}
+
+function out(obj) {
+  return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
+}
+
+// Tab-Namen für Google Sheets bereinigen (verbotene Zeichen, max. 100 Zeichen)
+function sanitizeTabName(name) {
+  return String(name).replace(/[:\\\/?*\[\]]/g, " ").trim().substring(0, 99) || "Antworten";
 }
