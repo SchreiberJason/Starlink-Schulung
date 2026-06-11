@@ -145,6 +145,27 @@ h2{
 }
 .vbar .pp:hover{ background:var(--brand); }
 .vbar .pp svg{ width:18px; height:18px; }
+/* Vollbild-Button (rechts) */
+.vbar .fs{
+  flex:0 0 auto;
+  width:36px; height:36px;
+  border:0; border-radius:9px;
+  background:rgba(255,255,255,.16);
+  color:#fff; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:background .15s;
+}
+.vbar .fs:hover{ background:var(--brand); }
+.vbar .fs svg{ width:18px; height:18px; }
+
+/* Vollbildmodus: Player füllt den Bildschirm */
+.player:fullscreen, .player:-webkit-full-screen{
+  width:100vw; height:100vh;
+  aspect-ratio:auto;
+  border-radius:0;
+  background:#000;
+}
+.player:fullscreen video, .player:-webkit-full-screen video{ object-fit:contain; }
 /* nicht klickbarer Fortschrittsbalken (kein Spulen) */
 .vtrack{
   flex:1 1 auto;

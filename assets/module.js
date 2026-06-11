@@ -27,6 +27,30 @@
   var PLAY  = "M8 5v14l11-7z";
   var PAUSE = "M6 5h4v14H6zM14 5h4v14h-4z";
   var CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+  var FS_OPEN  = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>';
+  var FS_CLOSE = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V5a1 1 0 0 1 1-1h3M20 8V5a1 1 0 0 0-1-1h-3M4 16v3a1 1 0 0 0 1 1h3M20 16v3a1 1 0 0 1-1 1h-3"/></svg>';
+
+  function fsActive(){ return document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement; }
+  function addFullscreen(player, getVid){
+    var vbar = player.querySelector(".vbar");
+    if(!vbar) return;
+    var btn = document.createElement("button");
+    btn.className = "fs"; btn.type = "button";
+    btn.setAttribute("aria-label", "Vollbild");
+    btn.innerHTML = FS_OPEN;
+    vbar.appendChild(btn);
+    btn.addEventListener("click", function(){
+      if(fsActive()){
+        (document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen || function(){}).call(document);
+      } else if(player.requestFullscreen){ player.requestFullscreen(); }
+      else if(player.webkitRequestFullscreen){ player.webkitRequestFullscreen(); }
+      else if(player.msRequestFullscreen){ player.msRequestFullscreen(); }
+      else { var v = getVid && getVid(); if(v && v.webkitEnterFullscreen) v.webkitEnterFullscreen(); }  // iOS-Fallback
+    });
+    function sync(){ btn.innerHTML = fsActive() ? FS_CLOSE : FS_OPEN; }
+    document.addEventListener("fullscreenchange", sync);
+    document.addEventListener("webkitfullscreenchange", sync);
+  }
 
   /* ---------- Fortschritt speichern / laden ---------- */
   var KEY = "hl-progress:" + location.pathname;
@@ -118,6 +142,7 @@
     });
 
     player._pause = function(){ if(!vid.paused) vid.pause(); };
+    addFullscreen(player, function(){ return vid; });
     if(done) markWatched(player, note);
     update();
   }
@@ -183,6 +208,7 @@
     big.addEventListener("click", toggle);
     pp.addEventListener("click", toggle);
     player._pause = function(){ try{ yp.pauseVideo(); }catch(e){} };
+    addFullscreen(player, null);
     update();
   }
 
