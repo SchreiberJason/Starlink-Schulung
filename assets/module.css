@@ -169,27 +169,90 @@ h2{
 }
 .vhint.show{ opacity:1; }
 
-/* Abschluss-Box (erscheint nach vollständigem Ansehen) */
-.complete{
-  margin-top:20px;
-  border:1px solid var(--border);
-  background:var(--surface);
-  border-radius:var(--radius);
-  padding:18px;
-  display:flex; align-items:center; gap:14px;
-  flex-wrap:wrap;
+/* Hinweis unter dem Video (steuert das Weiterkommen) */
+.watchnote{
+  margin-top:14px;
+  display:flex; align-items:center; gap:10px;
+  font-size:14px; font-weight:600;
+  color:var(--text-soft);
 }
-.complete .ic{
+.watchnote .dot{
   flex:0 0 auto;
-  width:42px; height:42px; border-radius:50%;
+  width:24px; height:24px; border-radius:50%;
   display:flex; align-items:center; justify-content:center;
-  background:#e7f3ea; color:#1f9d55;
+  background:var(--surface); border:1px solid var(--border);
+  color:var(--text-soft);
 }
-.complete.locked .ic{ background:var(--surface); color:var(--text-soft); border:1px solid var(--border); }
-.complete .txt{ flex:1 1 200px; }
-.complete .txt b{ display:block; color:var(--navy); font-size:15px; }
-.complete .txt span{ font-size:13px; color:var(--text-soft); }
-.complete .btn{ flex:0 0 auto; }
+.watchnote .dot svg{ width:14px; height:14px; }
+.watchnote.done{ color:#1f9d55; }
+.watchnote.done .dot{ background:#e7f3ea; border-color:#cfe9d8; color:#1f9d55; }
+
+/* ===== Anweisungs-Listen (Kursanweisungen) ===== */
+.steps-list, .tips-list{ margin:4px 0 22px; padding-left:0; list-style:none; }
+.steps-list{ counter-reset:s; }
+.steps-list li, .tips-list li{
+  position:relative;
+  padding:0 0 14px 40px;
+  font-size:clamp(15px,2.1vw,17px);
+  color:var(--text);
+  line-height:1.55;
+}
+.steps-list li:last-child, .tips-list li:last-child{ padding-bottom:0; }
+.steps-list li b, .tips-list li b{ color:var(--navy); }
+.steps-list li::before{
+  counter-increment:s;
+  content:counter(s);
+  position:absolute; left:0; top:0;
+  width:27px; height:27px;
+  display:flex; align-items:center; justify-content:center;
+  background:var(--brand); color:#fff;
+  font-size:13px; font-weight:800;
+  border-radius:50%;
+}
+.tips-list li::before{
+  content:"";
+  position:absolute; left:9px; top:9px;
+  width:8px; height:8px; border-radius:50%;
+  background:var(--brand);
+}
+.lead a, .tips-list a, .steps-list a{ color:var(--brand); font-weight:700; }
+
+/* ===== Kursmenü / Übersicht ===== */
+.menu-sub{
+  font-size:clamp(16px,2.3vw,18px);
+  font-weight:700;
+  color:var(--brand);
+  margin:-6px 0 20px;
+}
+.outline .mod{ margin-bottom:24px; }
+.outline .mt{
+  font-size:13px; font-weight:800;
+  text-transform:uppercase; letter-spacing:.05em;
+  color:var(--brand);
+  background:var(--brand-soft);
+  display:inline-block;
+  padding:4px 11px; border-radius:99px;
+  margin-bottom:10px;
+}
+.outline .ms{
+  font-size:clamp(17px,2.6vw,20px);
+  font-weight:800; color:var(--navy);
+  margin:2px 0 10px;
+}
+.outline ul{ list-style:none; }
+.outline li{
+  display:flex; align-items:center; gap:12px;
+  padding:11px 2px;
+  border-bottom:1px solid var(--border);
+  font-size:15px; color:var(--text);
+}
+.outline li:last-child{ border-bottom:0; }
+.outline li::before{
+  content:"";
+  flex:0 0 auto;
+  width:7px; height:7px; border-radius:50%;
+  background:var(--brand);
+}
 
 /* Steuerleiste */
 .controls{

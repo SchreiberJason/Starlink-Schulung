@@ -4,174 +4,273 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="robots" content="noindex" />
-<title>Modul 1 – Das Starlink-Zertifizierungsprogramm</title>
+<title>Modul 1 – Starlink-Zertifizierungsprogramm</title>
 <link rel="stylesheet" href="../assets/module.css" />
 </head>
 <body>
   <main class="wrap">
     <span class="eyebrow">Modul 1</span>
 
+    <!-- ===== Schritt 1: Einführung + Video (anschaupflichtig) ===== -->
     <section class="step active" data-step>
       <h1>Das Starlink-Zertifizierungsprogramm</h1>
       <div class="lead">
         <p>Das Programm zielt darauf ab, ein umfassendes Wissen in verschiedenen Themenbereichen und damit einhergehende Fähigkeiten zu vermitteln. Es besteht aus mehreren Schulungsmodulen, die auf spezifische Wissensfelder ausgerichtet sind, und stattet Personen mit den notwendigen Werkzeugen und dem erforderlichen Wissen aus, um bestmögliche Ergebnisse zu erzielen.</p>
         <p>Jedes Modul beinhaltet in der Regel eine Mischung aus Lehrmaterialien, darunter Videos, Anleitungen und weiteren Aktivitäten, um die Lernenden bestmöglich vorzubereiten. Die Inhalte sind so gestaltet, dass sie ein schrittweises Lernen fördern, ergänzt durch Wissensüberprüfungen, die das Verständnis vertiefen und das Wissen festigen.</p>
       </div>
-
-      <!-- Anschaupflichtiger Player: kein Vorspulen, mitlaufender Timer -->
-      <div class="player" id="player">
-        <video id="vid" playsinline preload="metadata"
-               controlslist="nodownload noplaybackrate noremoteplayback"
-               disablepictureinpicture oncontextmenu="return false">
+      <div class="player">
+        <video playsinline preload="metadata" controlslist="nodownload noplaybackrate noremoteplayback" disablepictureinpicture oncontextmenu="return false">
           <source src="../media/modul-1-zertifizierungsprogramm.mp4" type="video/mp4" />
           Ihr Browser kann dieses Video nicht abspielen.
         </video>
-
-        <div class="vhint" id="vhint">Vorspulen ist deaktiviert</div>
-
-        <button class="bigplay" id="bigplay" aria-label="Video abspielen">
-          <span><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
-        </button>
-
+        <div class="vhint">Vorspulen ist deaktiviert</div>
+        <button class="bigplay" aria-label="Video abspielen"><span><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span></button>
         <div class="vbar">
-          <button class="pp" id="pp" aria-label="Abspielen/Pause">
-            <svg id="ppIcon" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
-          </button>
-          <div class="vtrack"><i id="vfill"></i></div>
-          <span class="vtime" id="vtime">00:00 / 00:00</span>
+          <button class="pp" aria-label="Abspielen/Pause"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></button>
+          <div class="vtrack"><i></i></div>
+          <span class="vtime">00:00 / 00:00</span>
         </div>
       </div>
-
-      <!-- Abschluss: erst nach vollständigem Ansehen aktiv -->
-      <div class="complete locked" id="complete">
-        <div class="ic" id="cIc">
-          <svg id="cIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
-        </div>
-        <div class="txt">
-          <b id="cTitle">Bitte sieh dir das Video vollständig an</b>
-          <span id="cSub">Die Aufgabe kann erst danach abgeschlossen werden.</span>
-        </div>
-        <button class="btn btn-primary" id="finish" disabled>
-          Aufgabe abschließen
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </button>
+      <div class="watchnote">
+        <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>
+        <span class="t">Bitte sieh dir das Video vollständig an, um fortzufahren.</span>
       </div>
     </section>
+
+    <!-- ===== Schritt 2: Kursanweisungen ===== -->
+    <section class="step" data-step>
+      <h1>Kursanweisungen</h1>
+      <div class="lead">
+        <p>Willkommen beim Starlink-Zertifizierungsprogramm.</p>
+      </div>
+      <h2>Erste Schritte</h2>
+      <ol class="steps-list">
+        <li><b>Beginnen Sie mit Modul 1:</b> Klicken Sie auf „Was ist Starlink".</li>
+        <li><b>Folgen Sie der Reihenfolge:</b> Jedes Modul muss der Reihe nach abgeschlossen werden. Sie können keinen der Schritte überspringen.</li>
+        <li><b>Schließen Sie jede Einheit ab:</b> Sehen Sie sich Videos an, überprüfen Sie Präsentationen und laden Sie Checklisten herunter, bevor Sie eine Einheit als abgeschlossen markieren.</li>
+        <li><b>Bestehen Sie die Quizze:</b> Jedes Modul endet mit einem kurzen Quiz. Eine Mindestpunktzahl ist erforderlich, um das nächste Modul freizuschalten.</li>
+        <li><b>Abschlussprüfung &amp; Zertifikat:</b> Sobald Sie alle Module abgeschlossen haben, legen Sie die Zertifizierungsprüfung ab. Wenn Sie diese bestehen, erhalten Sie automatisch Ihr SBPM Starlink-Installations-Zertifikat.</li>
+      </ol>
+      <h2>Hilfreiche Tipps</h2>
+      <ul class="tips-list">
+        <li><b>Laden Sie Checklisten und Referenzhandbücher herunter</b> – Sie werden sie bei realen Installationen benötigen.</li>
+        <li><b>Speichern Sie Ihren Fortschritt</b> – Sie können sich jederzeit abmelden; das System merkt sich, wo Sie aufgehört haben.</li>
+        <li><b>Fordern Sie Unterstützung an</b> – bei technischen Problemen kontaktieren Sie bitte <a href="mailto:Starlink@sbpmpartners.com">Starlink@sbpmpartners.com</a>.</li>
+      </ul>
+    </section>
+
+    <!-- ===== Schritt 3: Kursmenü ===== -->
+    <section class="step" data-step>
+      <h1>Kursmenü</h1>
+      <p class="menu-sub">Starlink-Zertifizierungsprogramm</p>
+      <div class="outline">
+        <div class="mod">
+          <ul><li>Kursanweisungen</li></ul>
+        </div>
+        <div class="mod">
+          <span class="mt">Modul 1</span>
+          <ul>
+            <li>Das Starlink-Zertifizierungsprogramm</li>
+            <li>Was ist Starlink?</li>
+            <li>Starlink Standard Schnellstart</li>
+            <li>Wissensüberprüfung</li>
+          </ul>
+        </div>
+        <div class="mod">
+          <span class="mt">Modul 2</span>
+          <div class="ms">Installationsgrundlagen</div>
+          <ul>
+            <li>Starlink App – Leitfaden</li>
+            <li>Wissensüberprüfung – Starlink App</li>
+            <li>Starlink Standard Installationsvideo</li>
+            <li>Starlink Standard Wandmontage Installationsvideo</li>
+            <li>Starlink Ausrichtungsvideo</li>
+            <li>Starlink Perm Performance Video</li>
+            <li>Starlink Hindernisvideo</li>
+            <li>Starlink Pivot Mount Installationsvideo</li>
+            <li>Starlink Neustart-Video</li>
+            <li>Starlink Werkseinstellungen wiederherstellen</li>
+            <li>Installations-Best Practices</li>
+            <li>Wissensüberprüfung</li>
+          </ul>
+        </div>
+        <div class="mod">
+          <span class="mt">Modul 3</span>
+          <div class="ms">Arbeitsaufträge &amp; Dokumentation</div>
+          <ul>
+            <li>Arbeitsaufträge, Dokumentation und Qualitätsstandards</li>
+            <li>Wissensüberprüfung – Arbeitsaufträge und Dokumentation</li>
+            <li>Wissensüberprüfung – Finale</li>
+            <li>Checklisten</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Schritt 4: Was ist Starlink? + Video (anschaupflichtig) ===== -->
+    <section class="step" data-step>
+      <h1>Was ist Starlink?</h1>
+      <div class="lead">
+        <p>Sieh dir das folgende Video vollständig an, um diese Einheit abzuschließen.</p>
+      </div>
+      <div class="player">
+        <video playsinline preload="metadata" controlslist="nodownload noplaybackrate noremoteplayback" disablepictureinpicture oncontextmenu="return false">
+          <source src="../media/modul-1-was-ist-starlink.mp4" type="video/mp4" />
+          Ihr Browser kann dieses Video nicht abspielen.
+        </video>
+        <div class="vhint">Vorspulen ist deaktiviert</div>
+        <button class="bigplay" aria-label="Video abspielen"><span><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span></button>
+        <div class="vbar">
+          <button class="pp" aria-label="Abspielen/Pause"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></button>
+          <div class="vtrack"><i></i></div>
+          <span class="vtime">00:00 / 00:00</span>
+        </div>
+      </div>
+      <div class="watchnote">
+        <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>
+        <span class="t">Bitte sieh dir das Video vollständig an, um abzuschließen.</span>
+      </div>
+    </section>
+
+    <!-- ===== Navigation ===== -->
+    <div class="controls" id="controls">
+      <button class="btn btn-ghost" id="prev">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Zurück
+      </button>
+      <div class="progress">
+        <div class="label">Schritt <b id="cur">1</b> von <span id="total">4</span></div>
+        <div class="bar"><i id="fill"></i></div>
+      </div>
+      <button class="btn btn-primary" id="next">
+        <span id="nextLbl">Weiter</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
   </main>
 
 <script>
 (function(){
   "use strict";
 
-  /* Fountain "End event": muss exakt dem Wert im Fountain-Feld entsprechen.
-     Standard: "videoCompleted". Per ?endEvent=... überschreibbar. */
-  var params = new URLSearchParams(location.search);
-  var END_EVENT = params.get("endEvent") || "videoCompleted";
+  /* Fountain "End event" – muss exakt dem Wert im Fountain-Feld entsprechen.
+     Standard: "videoCompleted"; per ?endEvent=... überschreibbar. */
+  var END_EVENT = new URLSearchParams(location.search).get("endEvent") || "videoCompleted";
 
-  var vid    = document.getElementById("vid");
-  var player = document.getElementById("player");
-  var bigplay= document.getElementById("bigplay");
-  var pp     = document.getElementById("pp");
-  var ppIcon = document.getElementById("ppIcon");
-  var vfill  = document.getElementById("vfill");
-  var vtime  = document.getElementById("vtime");
-  var vhint  = document.getElementById("vhint");
-  var box    = document.getElementById("complete");
-  var cIcon  = document.getElementById("cIcon");
-  var cIc    = document.getElementById("cIc");
-  var cTitle = document.getElementById("cTitle");
-  var cSub   = document.getElementById("cSub");
-  var finish = document.getElementById("finish");
+  var steps  = Array.prototype.slice.call(document.querySelectorAll("[data-step]"));
+  var TOTAL  = steps.length;
+  var i      = 0;
+
+  var prev   = document.getElementById("prev");
+  var next   = document.getElementById("next");
+  var nextLbl= document.getElementById("nextLbl");
+  var curEl  = document.getElementById("cur");
+  var fill   = document.getElementById("fill");
+  document.getElementById("total").textContent = TOTAL;
 
   var PLAY  = "M8 5v14l11-7z";
   var PAUSE = "M6 5h4v14H6zM14 5h4v14h-4z";
-
-  var maxT = 0;        // am weitesten angesehene Stelle (Sekunden)
-  var watched = false; // Video vollständig gesehen?
-  var hintTimer = null;
+  var CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
 
   function fmt(s){
     if(!isFinite(s) || s<0) s=0;
     var m=Math.floor(s/60), r=Math.floor(s%60);
     return (m<10?"0":"")+m+":"+(r<10?"0":"")+r;
   }
-  function showHint(){
-    vhint.classList.add("show");
-    clearTimeout(hintTimer);
-    hintTimer = setTimeout(function(){ vhint.classList.remove("show"); }, 1600);
-  }
-  function setPlayIcon(playing){
-    ppIcon.setAttribute("d", playing ? PAUSE : PLAY);
-  }
 
-  function update(){
-    var d = vid.duration || 0;
-    vfill.style.width = d ? (vid.currentTime/d*100)+"%" : "0%";
-    vtime.textContent = fmt(vid.currentTime) + " / " + fmt(d);
-  }
+  // einen Video-Player einrichten (kein Vorspulen, Timer, Abschluss-Tracking)
+  function initPlayer(player, step){
+    var vid    = player.querySelector("video");
+    var big    = player.querySelector(".bigplay");
+    var pp     = player.querySelector(".pp");
+    var ppPath = pp.querySelector("path");
+    var vfill  = player.querySelector(".vtrack > i");
+    var vtime  = player.querySelector(".vtime");
+    var vhint  = player.querySelector(".vhint");
+    var note   = step.querySelector(".watchnote");
+    var maxT   = 0, hintTimer = null;
 
-  // Vorspulen verhindern: nie über die bereits gesehene Stelle hinaus springen
-  vid.addEventListener("timeupdate", function(){
-    if(vid.currentTime > maxT + 0.5){
-      vid.currentTime = maxT;       // Sprung nach vorne -> zurücksetzen
-      showHint();
-    } else {
-      if(vid.currentTime > maxT) maxT = vid.currentTime;
+    function update(){
+      var d = vid.duration || 0;
+      vfill.style.width = d ? (vid.currentTime/d*100)+"%" : "0%";
+      vtime.textContent = fmt(vid.currentTime) + " / " + fmt(d);
     }
+    function hint(){
+      vhint.classList.add("show");
+      clearTimeout(hintTimer);
+      hintTimer = setTimeout(function(){ vhint.classList.remove("show"); }, 1600);
+    }
+    function setIcon(playing){ ppPath.setAttribute("d", playing ? PAUSE : PLAY); }
+    function toggle(){ if(vid.paused) vid.play(); else vid.pause(); }
+
+    vid.addEventListener("timeupdate", function(){
+      if(vid.currentTime > maxT + 0.5){ vid.currentTime = maxT; hint(); }   // Sprung nach vorne -> zurück
+      else if(vid.currentTime > maxT){ maxT = vid.currentTime; }
+      update();
+    });
+    vid.addEventListener("seeking", function(){
+      if(vid.currentTime > maxT + 0.5){ vid.currentTime = maxT; hint(); }
+    });
+    vid.addEventListener("loadedmetadata", update);
+    big.addEventListener("click", toggle);
+    pp.addEventListener("click", toggle);
+    vid.addEventListener("play",  function(){ big.classList.add("hide"); setIcon(true); });
+    vid.addEventListener("pause", function(){ if(!vid.ended) big.classList.remove("hide"); setIcon(false); });
+    vid.addEventListener("keydown", function(e){
+      if(e.key===" " || e.key==="k"){ e.preventDefault(); toggle(); } else { e.preventDefault(); }
+    });
+    vid.addEventListener("ended", function(){
+      big.classList.remove("hide"); setIcon(false);
+      player.dataset.watched = "1";
+      if(note){
+        note.classList.add("done");
+        note.querySelector(".dot").innerHTML = CHECK;
+        note.querySelector(".t").textContent = "Video vollständig angesehen";
+      }
+      refreshNav();
+    });
+
+    player._pause = function(){ if(!vid.paused) vid.pause(); };
     update();
-  });
-  vid.addEventListener("seeking", function(){
-    if(vid.currentTime > maxT + 0.5){
-      vid.currentTime = maxT;
-      showHint();
-    }
-  });
-  vid.addEventListener("loadedmetadata", update);
+  }
 
-  // Play / Pause
-  function toggle(){ if(vid.paused) vid.play(); else vid.pause(); }
-  bigplay.addEventListener("click", toggle);
-  pp.addEventListener("click", toggle);
-  vid.addEventListener("play",  function(){ bigplay.classList.add("hide"); setPlayIcon(true); });
-  vid.addEventListener("pause", function(){ if(!vid.ended) bigplay.classList.remove("hide"); setPlayIcon(false); });
+  function stepReady(step){
+    var p = step.querySelector(".player");
+    return p ? p.dataset.watched === "1" : true;   // ohne Video: immer bereit
+  }
+  function pauseAll(){
+    steps.forEach(function(s){ var p=s.querySelector(".player"); if(p && p._pause) p._pause(); });
+  }
+  function refreshNav(){ next.disabled = !stepReady(steps[i]); }
 
-  // Tastatur-Vorspulen unterbinden (Pfeile etc.), Leertaste = Play/Pause
-  vid.addEventListener("keydown", function(e){
-    if(e.key === " " || e.key === "k"){ e.preventDefault(); toggle(); }
-    else { e.preventDefault(); }
-  });
+  function render(){
+    steps.forEach(function(s,n){ s.classList.toggle("active", n===i); });
+    curEl.textContent = i+1;
+    fill.style.width = ((i+1)/TOTAL*100) + "%";
+    prev.disabled = (i===0);
+    nextLbl.textContent = (i===TOTAL-1) ? "Aufgabe abschließen" : "Weiter";
+    refreshNav();
+    window.scrollTo({ top:0, behavior:"smooth" });
+  }
 
-  // Vollständig angesehen
-  vid.addEventListener("ended", function(){
-    watched = true;
-    bigplay.classList.remove("hide");   // erlaubt erneutes Ansehen
-    setPlayIcon(false);
-    box.classList.remove("locked");
-    cIc.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
-    cTitle.textContent = "Video vollständig angesehen";
-    cSub.textContent = "Du kannst die Aufgabe jetzt abschließen.";
-    finish.disabled = false;
-  });
-
-  // Abschluss -> Fountain benachrichtigen (mehrere Formate für Kompatibilität)
   function notifyFountain(){
-    var p = window.parent;
-    if(!p) return;
+    var p = window.parent; if(!p) return;
     try{ p.postMessage(END_EVENT, "*"); }catch(e){}
     try{ p.postMessage({ event: END_EVENT }, "*"); }catch(e){}
     try{ p.postMessage({ type:  END_EVENT }, "*"); }catch(e){}
     try{ p.postMessage({ name:  END_EVENT }, "*"); }catch(e){}
     try{ p.postMessage(JSON.stringify({ event: END_EVENT }), "*"); }catch(e){}
   }
-  finish.addEventListener("click", function(){
-    if(!watched) return;
-    notifyFountain();
-    finish.disabled = true;
-    cTitle.textContent = "Abgeschlossen ✓";
-    cSub.textContent = "Du wirst zur nächsten Aufgabe weitergeleitet …";
+
+  prev.addEventListener("click", function(){ if(i>0){ pauseAll(); i--; render(); } });
+  next.addEventListener("click", function(){
+    if(next.disabled) return;
+    if(i < TOTAL-1){ pauseAll(); i++; render(); }
+    else { pauseAll(); notifyFountain(); next.disabled = true; nextLbl.textContent = "Abgeschlossen ✓"; }
   });
 
-  update();
+  steps.forEach(function(s){ var p=s.querySelector(".player"); if(p) initPlayer(p, s); });
+  render();
 })();
 </script>
 </body>
