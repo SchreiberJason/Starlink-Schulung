@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="robots" content="noindex" />
+<title>Starlink-Installation – Best Practices</title>
+<style>
+  /* ===== Helferline-Stil – zentrale Variablen (hier anpassen) ===== */
+  :root{
+    --brand:        #ff5c00;   /* Helferline-Orange */
+    --brand-dark:   #e04f00;
+    --navy:         #0d2d5f;   /* dunkelblau wie die Folien */
+    --bg:           #ffffff;
+    --surface:      #f4f6fa;
+    --text:         #0d2d5f;
+    --text-soft:    #5a6b85;
+    --border:       #e3e8f0;
+    --radius:       14px;
+    --shadow:       0 6px 28px rgba(13,45,95,.16);
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent; }
+  html,body{ height:100%; }
+  body{
+    font-family:var(--font);
+    color:var(--text);
+    background:var(--bg);
+    line-height:1.5;
+    /* sicher im iframe + auf dem Handy (Notch) */
+    padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  }
+
+  .app{
+    max-width:1100px;
+    margin:0 auto;
+    padding:14px 14px 18px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    min-height:100%;
+  }
+
+  /* ===== Folien-Bühne ===== */
+  .stage{
+    position:relative;
+    width:100%;
+    aspect-ratio:16/9;
+    background:var(--navy);
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    touch-action:pan-y;
+    user-select:none;
+  }
+  .stage img{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    opacity:0;
+    transition:opacity .25s ease;
+  }
+  .stage img.active{ opacity:1; }
+
+  /* Pfeile auf der Bühne (Desktop / Tablet) */
+  .edge{
+    position:absolute;
+    top:0; bottom:0;
+    width:18%;
+    max-width:90px;
+    border:0;
+    background:transparent;
+    color:#fff;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    opacity:0;
+    transition:opacity .2s ease;
+    z-index:2;
+  }
+  .stage:hover .edge{ opacity:1; }
+  .edge.prev{ left:0; justify-content:flex-start; padding-left:10px; }
+  .edge.next{ right:0; justify-content:flex-end; padding-right:10px; }
+  .edge:disabled{ opacity:0 !important; cursor:default; }
+  .edge svg{
+    width:42px; height:42px;
+    background:rgba(13,45,95,.55);
+    border-radius:50%;
+    padding:8px;
+    backdrop-filter:blur(2px);
+  }
+  .edge:hover svg{ background:var(--brand); }
+
+  /* Ladeindikator */
+  .stage::after{
+    content:"";
+    position:absolute;
+    top:50%; left:50%;
+    width:34px; height:34px;
+    margin:-17px 0 0 -17px;
+    border:3px solid rgba(255,255,255,.25);
+    border-top-color:#fff;
+    border-radius:50%;
+    animation:spin .8s linear infinite;
+    opacity:0;
+    transition:opacity .2s;
+    z-index:1;
+  }
+  .stage.loading::after{ opacity:1; }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+
+  /* ===== Steuerleiste ===== */
+  .controls{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .nav-btn{
+    flex:0 0 auto;
+    width:46px; height:46px;
+    border:1px solid var(--border);
+    background:var(--bg);
+    color:var(--navy);
+    border-radius:50%;
+    font-size:0;
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    transition:background .15s, border-color .15s, transform .05s;
+  }
+  .nav-btn svg{ width:22px; height:22px; }
+  .nav-btn:active{ transform:scale(.94); }
+  .nav-btn:hover:not(:disabled){ border-color:var(--brand); color:var(--brand); }
+  .nav-btn:disabled{ opacity:.35; cursor:default; }
+
+  .meter{
+    flex:1 1 auto;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    min-width:0;
+  }
+  .counter{
+    font-size:13px;
+    font-weight:600;
+    color:var(--text-soft);
+    text-align:center;
+    letter-spacing:.02em;
+  }
+  .counter b{ color:var(--navy); }
+  .bar{
+    height:6px;
+    width:100%;
+    background:var(--surface);
+    border-radius:99px;
+    overflow:hidden;
+  }
+  .bar > i{
+    display:block;
+    height:100%;
+    width:0;
+    background:var(--brand);
+    border-radius:99px;
+    transition:width .25s ease;
+  }
+
+  /* ===== Download-Leiste ===== */
+  .actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    flex:1 1 auto;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+    padding:13px 18px;
+    border-radius:var(--radius);
+    font-size:15px;
+    font-weight:700;
+    text-decoration:none;
+    cursor:pointer;
+    border:1px solid transparent;
+    transition:background .15s, border-color .15s, transform .05s, color .15s;
+  }
+  .btn:active{ transform:scale(.985); }
+  .btn-primary{
+    background:var(--brand);
+    color:#fff;
+  }
+  .btn-primary:hover{ background:var(--brand-dark); }
+  .btn-ghost{
+    background:var(--surface);
+    color:var(--navy);
+    border-color:var(--border);
+  }
+  .btn-ghost:hover{ border-color:var(--brand); color:var(--brand); }
+  .btn svg{ width:19px; height:19px; flex:0 0 auto; }
+
+  /* ===== Responsiv ===== */
+  @media (max-width:560px){
+    .app{ padding:10px 10px 14px; gap:11px; }
+    .stage{ border-radius:11px; }
+    .edge{ display:none; }            /* am Handy nur Wischen + Buttons */
+    .nav-btn{ width:44px; height:44px; }
+    .btn{ font-size:14px; padding:12px 14px; }
+  }
+  /* sehr schmal: Buttons untereinander */
+  @media (max-width:380px){
+    .actions{ flex-direction:column; }
+  }
+</style>
+</head>
+<body>
+  <main class="app">
+    <!-- Folien -->
+    <div class="stage loading" id="stage">
+      <button class="edge prev" id="edgePrev" aria-label="Vorherige Folie">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="edge next" id="edgeNext" aria-label="Nächste Folie">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+
+    <!-- Navigation + Fortschritt -->
+    <div class="controls">
+      <button class="nav-btn" id="prev" aria-label="Zurück">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="meter">
+        <div class="counter"><b id="cur">1</b> / <span id="total">18</span></div>
+        <div class="bar"><i id="fill"></i></div>
+      </div>
+      <button class="nav-btn" id="next" aria-label="Weiter">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+
+    <!-- Aktionen -->
+    <div class="actions">
+      <a class="btn btn-primary" id="download" href="Starlink-Installation-Best-Practices.pdf" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Präsentation herunterladen (PDF)
+      </a>
+    </div>
+  </main>
+
+<script>
+(function(){
+  "use strict";
+  var TOTAL = 18;
+  var PATH  = function(n){ return "slides/slide-" + String(n).padStart(2,"0") + ".jpg"; };
+
+  var stage   = document.getElementById("stage");
+  var curEl   = document.getElementById("cur");
+  var fillEl  = document.getElementById("fill");
+  var prevBtn = document.getElementById("prev");
+  var nextBtn = document.getElementById("next");
+  var edgePrev= document.getElementById("edgePrev");
+  var edgeNext= document.getElementById("edgeNext");
+
+  document.getElementById("total").textContent = TOTAL;
+
+  var imgs = [];   // gecachte <img> Elemente, lazy erzeugt
+  var index = 1;
+
+  function getImg(n){
+    if(imgs[n]) return imgs[n];
+    var img = new Image();
+    img.alt = "Folie " + n + " von " + TOTAL;
+    img.draggable = false;
+    img.src = PATH(n);
+    stage.appendChild(img);
+    imgs[n] = img;
+    return img;
+  }
+
+  function show(n){
+    n = Math.min(TOTAL, Math.max(1, n));
+    index = n;
+
+    var img = getImg(n);
+    // Ladezustand
+    stage.classList.toggle("loading", !img.complete);
+    if(!img.complete){
+      img.addEventListener("load", function(){
+        if(index === n) stage.classList.remove("loading");
+      }, { once:true });
+    }
+
+    // aktive Folie umschalten
+    for(var i=1;i<=TOTAL;i++){
+      if(imgs[i]) imgs[i].classList.toggle("active", i===n);
+    }
+    img.classList.add("active");
+
+    // Nachbarn vorladen
+    if(n < TOTAL) getImg(n+1);
+    if(n > 1)     getImg(n-1);
+
+    // UI aktualisieren
+    curEl.textContent = n;
+    fillEl.style.width = (n / TOTAL * 100) + "%";
+    var atStart = n===1, atEnd = n===TOTAL;
+    prevBtn.disabled = edgePrev.disabled = atStart;
+    nextBtn.disabled = edgeNext.disabled = atEnd;
+  }
+
+  function nextSlide(){ if(index < TOTAL) show(index+1); }
+  function prevSlide(){ if(index > 1)     show(index-1); }
+
+  prevBtn.addEventListener("click", prevSlide);
+  nextBtn.addEventListener("click", nextSlide);
+  edgePrev.addEventListener("click", prevSlide);
+  edgeNext.addEventListener("click", nextSlide);
+
+  // Tastatur (Desktop)
+  document.addEventListener("keydown", function(e){
+    if(e.key === "ArrowRight" || e.key === "PageDown"){ nextSlide(); }
+    else if(e.key === "ArrowLeft" || e.key === "PageUp"){ prevSlide(); }
+  });
+
+  // Wischen (Handy / Tablet)
+  var sx=0, sy=0, tracking=false;
+  stage.addEventListener("touchstart", function(e){
+    if(e.touches.length!==1) return;
+    sx=e.touches[0].clientX; sy=e.touches[0].clientY; tracking=true;
+  }, { passive:true });
+  stage.addEventListener("touchend", function(e){
+    if(!tracking) return; tracking=false;
+    var t=e.changedTouches[0];
+    var dx=t.clientX-sx, dy=t.clientY-sy;
+    if(Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)*1.4){
+      if(dx < 0) nextSlide(); else prevSlide();
+    }
+  }, { passive:true });
+
+  show(1);
+})();
+</script>
+</body>
+</html>
