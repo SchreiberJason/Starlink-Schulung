@@ -98,6 +98,12 @@ h2{
   object-fit:contain;
   background:#000;
 }
+/* YouTube-Einbettung füllt den Player */
+.player .ytmount, .player iframe{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  border:0;
+}
 
 /* großer Play-Button (Overlay) */
 .bigplay{
@@ -186,6 +192,23 @@ h2{
 .watchnote .dot svg{ width:14px; height:14px; }
 .watchnote.done{ color:#1f9d55; }
 .watchnote.done .dot{ background:#e7f3ea; border-color:#cfe9d8; color:#1f9d55; }
+
+/* ===== Platzhalter (Inhalt folgt) ===== */
+.placeholder{
+  margin-top:24px;
+  width:100%;
+  aspect-ratio:16/9;
+  border:2px dashed var(--border);
+  border-radius:var(--radius);
+  background:var(--surface);
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  text-align:center; gap:10px; padding:24px;
+  color:var(--text-soft);
+}
+.placeholder svg{ width:40px; height:40px; color:var(--brand); }
+.placeholder b{ color:var(--navy); font-size:16px; }
+.placeholder span{ font-size:14px; }
 
 /* ===== Anweisungs-Listen (Kursanweisungen) ===== */
 .steps-list, .tips-list{ margin:4px 0 22px; padding-left:0; list-style:none; }

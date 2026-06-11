@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="robots" content="noindex" />
+<title>Modul 2 – Installationsgrundlagen (Teil 1)</title>
+<link rel="stylesheet" href="../assets/module.css" />
+</head>
+<body>
+  <main class="wrap">
+    <span class="eyebrow">Modul 2 · Teil 1</span>
+
+    <!-- ===== Schritt 1: Starlink Schnellstartanleitung + Video ===== -->
+    <section class="step active" data-step>
+      <h1>Starlink Schnellstartanleitung</h1>
+      <div class="lead">
+        <p>Sieh dir das folgende Video vollständig an, um diese Einheit abzuschließen.</p>
+      </div>
+      <div class="player">
+        <video playsinline preload="metadata" controlslist="nodownload noplaybackrate noremoteplayback" disablepictureinpicture oncontextmenu="return false">
+          <source src="../media/modul-2-schnellstart.mp4" type="video/mp4" />
+          Ihr Browser kann dieses Video nicht abspielen.
+        </video>
+        <div class="vhint">Vorspulen ist deaktiviert</div>
+        <button class="bigplay" aria-label="Video abspielen"><span><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span></button>
+        <div class="vbar">
+          <button class="pp" aria-label="Abspielen/Pause"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></button>
+          <div class="vtrack"><i></i></div>
+          <span class="vtime">00:00 / 00:00</span>
+        </div>
+      </div>
+      <div class="watchnote">
+        <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>
+        <span class="t">Bitte sieh dir das Video vollständig an, um fortzufahren.</span>
+      </div>
+    </section>
+
+    <!-- ===== Schritt 2: Starlink App – Leitfaden + YouTube ===== -->
+    <section class="step" data-step>
+      <h1>Starlink App – Leitfaden</h1>
+      <div class="lead">
+        <p>Sieh dir das folgende Video vollständig an, um diese Einheit abzuschließen.</p>
+      </div>
+      <div class="player yt" data-yt="VgG1nbSXvpU">
+        <div class="ytmount"></div>
+        <div class="vhint">Vorspulen ist deaktiviert</div>
+        <button class="bigplay" aria-label="Video abspielen"><span><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span></button>
+        <div class="vbar">
+          <button class="pp" aria-label="Abspielen/Pause"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></button>
+          <div class="vtrack"><i></i></div>
+          <span class="vtime">00:00 / 00:00</span>
+        </div>
+      </div>
+      <div class="watchnote">
+        <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>
+        <span class="t">Bitte sieh dir das Video vollständig an, um fortzufahren.</span>
+      </div>
+    </section>
+
+    <!-- ===== Schritt 3: Starlink-App – Einführung für Techniker (Präsentation folgt) ===== -->
+    <section class="step" data-step>
+      <h1>Starlink-App: Einführung für Techniker</h1>
+      <div class="lead">
+        <p>Sieh dir die folgende Präsentation an, um diesen Teil abzuschließen.</p>
+      </div>
+      <div class="placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        <b>Präsentation folgt</b>
+        <span>Die Folien werden hier eingefügt, sobald sie bereitstehen.</span>
+      </div>
+    </section>
+
+    <!-- ===== Navigation ===== -->
+    <div class="controls" id="controls">
+      <button class="btn btn-ghost" id="prev">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Zurück
+      </button>
+      <div class="progress">
+        <div class="label">Schritt <b id="cur">1</b> von <span id="total">3</span></div>
+        <div class="bar"><i id="fill"></i></div>
+      </div>
+      <button class="btn btn-primary" id="next">
+        <span id="nextLbl">Weiter</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </main>
+
+<script src="../assets/module.js"></script>
+</body>
+</html>
