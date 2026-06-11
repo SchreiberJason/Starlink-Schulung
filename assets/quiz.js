@@ -21,6 +21,8 @@
   var CROSS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
 
   function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+  function nowMs(){ return (window.performance && performance.now) ? performance.now() : Date.now(); }
+  function mmss(sec){ var m=Math.floor(sec/60), r=sec%60; return (m<10?"0":"")+m+":"+(r<10?"0":"")+r; }
   function eqSet(a,b){ if(a.length!==b.length) return false; for(var i=0;i<a.length;i++){ if(a[i]!==b[i]) return false; } return true; }
   function sortNum(arr){ return arr.slice().sort(function(a,b){ return a-b; }); }
   function context(){
@@ -42,6 +44,8 @@
     var ctx = context();
     var chosen = qs.map(function(){ return []; });
     var locked = false;
+    var startTs = null;   // Startzeit (sobald das Quiz sichtbar wird)
+    function startTimer(){ if(startTs === null) startTs = nowMs(); }
 
     var html = "";
     qs.forEach(function(q, qi){
@@ -66,6 +70,16 @@
     function answered(){ return chosen.filter(function(c){ return c.length>0; }).length; }
     function updateCount(){ countEl.textContent = answered() + " von " + qs.length + " beantwortet"; }
     updateCount();
+
+    // Zeitmessung starten, sobald das Quiz erstmals sichtbar wird (auch in Modulen)
+    if("IntersectionObserver" in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){ if(en.isIntersecting){ startTimer(); io.disconnect(); } });
+      });
+      io.observe(root);
+    } else {
+      startTimer();
+    }
 
     root.addEventListener("click", function(e){
       if(locked) return;
@@ -116,11 +130,13 @@
 
       var percent = Math.round(correct/qs.length*100);
       var passed = percent >= passPercent;
+      var durationSec = startTs !== null ? Math.max(0, Math.round((nowMs()-startTs)/1000)) : 0;
 
       send({
         module: cfg.module || document.title,
         workerUuid: ctx.workerUuid, taskUuid: ctx.taskUuid, flowUuid: ctx.flowUuid, companyUuid: ctx.companyUuid,
         score: correct, total: qs.length, percent: percent, passed: passed,
+        durationSec: durationSec, duration: mmss(durationSec),
         answers: answers, secret: cfg.secret || "", ts: new Date().toISOString()
       });
 

@@ -32,7 +32,8 @@ function doPost(e) {
     var sheet = ss.getSheetByName("Antworten") || ss.insertSheet("Antworten");
     if (sheet.getLastRow() === 0) {
       sheet.appendRow(["Zeitstempel", "Modul", "WorkerUUID", "TaskUUID", "FlowUUID", "CompanyUUID",
-                       "Punktzahl", "Gesamt", "Prozent", "Bestanden", "Antworten (JSON)"]);
+                       "Punktzahl", "Gesamt", "Prozent", "Bestanden",
+                       "Dauer (Sek.)", "Dauer (mm:ss)", "Antworten (JSON)"]);
     }
     sheet.appendRow([
       new Date(),
@@ -45,6 +46,8 @@ function doPost(e) {
       data.total != null ? data.total : "",
       data.percent != null ? data.percent : "",
       data.passed ? "ja" : "nein",
+      data.durationSec != null ? data.durationSec : "",
+      data.duration || "",
       JSON.stringify(data.answers || [])
     ]);
 
