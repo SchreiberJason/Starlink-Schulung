@@ -21,6 +21,7 @@
   var CROSS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
 
   function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+  function shuffle(a){ for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
   function nowMs(){ return (window.performance && performance.now) ? performance.now() : Date.now(); }
   function mmss(sec){ var m=Math.floor(sec/60), r=sec%60; return (m<10?"0":"")+m+":"+(r<10?"0":"")+r; }
   function eqSet(a,b){ if(a.length!==b.length) return false; for(var i=0;i<a.length;i++){ if(a[i]!==b[i]) return false; } return true; }
@@ -41,6 +42,10 @@
   function initQuiz(root, cfg, onResult){
     var qs = cfg.questions || [];
     if(!root || !qs.length) return null;
+    // Finale-Modus: zufällige Auswahl aus einem größeren Fragenpool
+    if(cfg.pickRandom && cfg.pickRandom > 0 && cfg.pickRandom < qs.length){
+      qs = shuffle(qs.slice()).slice(0, cfg.pickRandom);
+    }
     var passPercent = (typeof cfg.passPercent === "number") ? cfg.passPercent : 100;
     var blockOnFail = cfg.blockOnFail !== false;
     var endpoint = cfg.endpoint || DEFAULT_ENDPOINT;
@@ -123,10 +128,12 @@
         });
         var group = root.querySelector('.q[data-q="'+qi+'"] .opts');
         group.classList.add("locked");
+        // Nur die EIGENE Auswahl markieren – die richtige Antwort wird NICHT verraten
         Array.prototype.forEach.call(group.querySelectorAll(".opt"), function(b){
           var bi = +b.getAttribute("data-o");
-          if(correctArr.indexOf(bi)>=0) b.classList.add("correct");
-          else if(chosen[qi].indexOf(bi)>=0) b.classList.add("wrong");
+          if(chosen[qi].indexOf(bi) < 0) return;             // nicht gewählte Optionen unmarkiert lassen
+          if(correctArr.indexOf(bi) >= 0) b.classList.add("correct");  // eigene Wahl war richtig
+          else b.classList.add("wrong");                      // eigene Wahl war falsch
         });
       });
       locked = true; submitBtn.style.display = "none";
