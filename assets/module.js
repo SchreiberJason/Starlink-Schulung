@@ -261,7 +261,10 @@
   /* ---------- Navigation ---------- */
   function stepReady(step){
     var p = step.querySelector(".player");
-    return p ? p.dataset.watched === "1" : true;   // ohne Video: immer bereit
+    if(p) return p.dataset.watched === "1";        // Video: erst nach Ansehen
+    var q = step.querySelector(".quiz");
+    if(q) return q.dataset.passed === "1";          // Quiz: erst nach Bestehen
+    return true;                                    // sonst immer bereit
   }
   function pauseAll(){
     steps.forEach(function(s){ var p=s.querySelector(".player"); if(p && p._pause) p._pause(); });
@@ -304,6 +307,15 @@
     }
     var sl = s.querySelector(".slides");
     if(sl) initSlides(sl);
+    var qz = s.querySelector(".quiz");
+    if(qz && window.HLQuiz){
+      var dataTag = s.querySelector('script[data-quiz]');
+      var qcfg = null;
+      if(dataTag){ try{ qcfg = JSON.parse(dataTag.textContent); }catch(e){ qcfg = null; } }
+      if(qcfg){
+        window.HLQuiz.init(qz, qcfg, function(canProceed){ qz.dataset.passed = canProceed ? "1" : "0"; refreshNav(); });
+      }
+    }
   });
 
   if(ytQueue.length){

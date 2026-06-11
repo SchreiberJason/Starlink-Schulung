@@ -300,7 +300,9 @@ h2{
   display:flex; align-items:center; justify-content:center;
 }
 .qtext{ font-size:clamp(16px,2.2vw,18px); font-weight:700; color:var(--navy); padding-top:2px; }
+.qmulti{ font-size:.8em; font-weight:600; color:var(--text-soft); white-space:nowrap; }
 .opts{ display:flex; flex-direction:column; gap:9px; }
+.opts.multi .mark{ border-radius:6px; }   /* Mehrfachauswahl = eckige Kästchen */
 .opt{
   display:flex; align-items:center; gap:12px;
   width:100%; text-align:left;

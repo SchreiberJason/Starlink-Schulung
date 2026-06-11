@@ -132,6 +132,36 @@
       </div>
     </section>
 
+    <!-- ===== Schritt 5: Wissensüberprüfung ===== -->
+    <section class="step" data-step>
+      <h1>Wissensüberprüfung</h1>
+      <div class="lead">
+        <p>Beantworte alle Fragen richtig, um Modul 1 abzuschließen. Bei Fehlern kannst du es erneut versuchen.</p>
+      </div>
+      <div class="quiz"></div>
+      <script type="application/json" data-quiz>
+      {
+        "module": "Modul 1 – Wissensüberprüfung",
+        "passPercent": 100,
+        "blockOnFail": true,
+        "questions": [
+          { "q": "Welche der folgenden Vorteile bietet Starlink im Vergleich zu herkömmlichen Satelliten-Internetdiensten? Bitte eine auswählen.",
+            "options": ["Starlink nutzt eine große Satellitenkonstellation in der niedrigen Erdumlaufbahn.", "Starlink erfordert keine Sicht zum Himmel, um eine Verbindung herzustellen.", "Starlink funktioniert nur in warmen Klimazonen."],
+            "answer": 0 },
+          { "q": "Welche der folgenden Merkmale oder Anforderungen gelten für die Nutzung des Starlink-Internets gemäß den bereitgestellten Inhalten? Bitte eine auswählen.",
+            "options": ["Liefert Internet über geostationäre Satelliten", "Erfordert eine freie Sicht zum Himmel", "Funktioniert nur innerhalb der Vereinigten Staaten"],
+            "answer": 1 },
+          { "q": "Basierend auf den bereitgestellten Informationen, welche der folgenden Aussagen trifft auf Starlinks Technologie zu? Bitte eine auswählen.",
+            "options": ["Starlink funktioniert bei widrigen Wetterbedingungen nicht", "Starlink erfordert eine freie Sicht zum Himmel für einen optimalen Betrieb.", "Starlink-Kits enthalten nicht die für die Internetverbindung erforderliche Ausrüstung."],
+            "answer": 1 },
+          { "q": "Was bietet Starlink? Bitte eine auswählen.",
+            "options": ["Zugang zu Glasfaserkabeln", "Die fortschrittlichste Satellitentechnologie der Welt zur Bereitstellung von schnellem Internet mit geringer Latenz.", "Herkömmlicher Kabelfernsehservice"],
+            "answer": 1 }
+        ]
+      }
+      </script>
+    </section>
+
     <!-- ===== Navigation ===== -->
     <div class="controls" id="controls">
       <button class="btn btn-ghost" id="prev">
@@ -139,7 +169,7 @@
         Zurück
       </button>
       <div class="progress">
-        <div class="label">Schritt <b id="cur">1</b> von <span id="total">4</span></div>
+        <div class="label">Schritt <b id="cur">1</b> von <span id="total">5</span></div>
         <div class="bar"><i id="fill"></i></div>
       </div>
       <button class="btn btn-primary" id="next">
@@ -149,6 +179,7 @@
     </div>
   </main>
 
+<script src="../assets/quiz.js"></script>
 <script src="../assets/module.js"></script>
 </body>
 </html>

@@ -11,12 +11,9 @@
   <main class="wrap">
     <span class="eyebrow">Modul 2</span>
 
-    <!-- ===== Schritt 1: Starlink Schnellstartanleitung + Video ===== -->
     <section class="step active" data-step>
       <h1>Starlink Schnellstartanleitung</h1>
-      <div class="lead">
-        <p>Sieh dir das folgende Video vollständig an, um diese Einheit abzuschließen.</p>
-      </div>
+      <div class="lead"><p>Sieh dir das folgende Video vollständig an, um fortzufahren.</p></div>
       <div class="player">
         <video playsinline preload="metadata" controlslist="nodownload noplaybackrate noremoteplayback" disablepictureinpicture oncontextmenu="return false">
           <source src="../media/modul-2-schnellstart.mp4" type="video/mp4" />
@@ -36,12 +33,9 @@
       </div>
     </section>
 
-    <!-- ===== Schritt 2: Starlink App – Leitfaden + YouTube ===== -->
     <section class="step" data-step>
       <h1>Starlink App – Leitfaden</h1>
-      <div class="lead">
-        <p>Sieh dir das folgende Video vollständig an, um diese Einheit abzuschließen.</p>
-      </div>
+      <div class="lead"><p>Sieh dir das folgende Video vollständig an, um fortzufahren.</p></div>
       <div class="player yt" data-yt="VgG1nbSXvpU">
         <div class="ytmount"></div>
         <div class="vhint">Vorspulen ist deaktiviert</div>
@@ -58,24 +52,329 @@
       </div>
     </section>
 
-    <!-- ===== Schritt 3: Starlink-App – Einführung für Techniker (Präsentation folgt) ===== -->
     <section class="step" data-step>
       <h1>Starlink-App: Einführung für Techniker</h1>
-      <div class="lead">
-        <p>Sieh dir die folgende Präsentation an. Blättere mit den Pfeilen oder per Wischen durch die Folien.</p>
-      </div>
+      <div class="lead"><p>Sieh dir die folgende Präsentation an. Blättere mit den Pfeilen oder per Wischen durch die Folien.</p></div>
       <div class="slides" data-base="../slides/app-walkthrough/slide-" data-count="10">
         <div class="sstage"></div>
         <div class="scontrols">
-          <button class="snav" data-dir="-1" aria-label="Vorherige Folie">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-          </button>
+          <button class="snav" data-dir="-1" aria-label="Vorherige Folie"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
           <div class="scount"><b class="scur">1</b> / 10</div>
-          <button class="snav" data-dir="1" aria-label="Nächste Folie">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-          </button>
+          <button class="snav" data-dir="1" aria-label="Nächste Folie"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
         </div>
       </div>
+    </section>
+
+    <section class="step" data-step>
+      <h1>Wissensüberprüfung – Starlink App</h1>
+      <div class="lead"><p>Beantworte alle Fragen richtig, um fortzufahren. Bei Fehlern kannst du es erneut versuchen.</p></div>
+      <div class="quiz"></div>
+      <script type="application/json" data-quiz>
+      {
+        "module": "Modul 2 – Wissensüberprüfung Starlink App",
+        "passPercent": 100,
+        "blockOnFail": true,
+        "questions": [
+          {
+            "q": "Was ist der Zweck der Fehlerbehebung innerhalb der Starlink-App? Wählen Sie eine Option aus.",
+            "options": [
+              "Installationsaufträge dauerhaft speichern",
+              "Konnektivitätsprobleme diagnostizieren und beheben",
+              "Die Internetgeschwindigkeit über die Kapazität von Starlink hinaus steigern"
+            ],
+            "answer": 1
+          },
+          {
+            "q": "Was sollten Sie tun, wenn in der Starlink-App die Meldung „Starlink nicht erreichbar“ angezeigt wird? Wählen Sie eine Option aus.",
+            "options": [
+              "Die Starlink-Schüssel sofort ersetzen",
+              "Starten Sie das System neu, indem Sie die Stromversorgung trennen und anschließend wieder anschließen",
+              "Die Meldung ignorieren und später erneut versuchen"
+            ],
+            "answer": 1
+          },
+          {
+            "q": "Welcher der folgenden Schritte trägt gemäß den bereitgestellten Inhalten zur optimalen Zuverlässigkeit einer Starlink-Installation bei? Wählen Sie eine Option aus.",
+            "options": [
+              "Die Schüssel abgedeckt lassen, um Witterungseinflüsse zu vermeiden",
+              "Die Schüssel mit einer Schutzplane abdecken, um sie sauber zu halten.",
+              "Die Schüssel so montieren, dass sie eine klare, freie Sicht auf den Himmel hat."
+            ],
+            "answer": 2
+          },
+          {
+            "q": "Welche der folgenden Aussagen über die Funktionen und Möglichkeiten der Starlink-App sind gemäß den bereitgestellten Inhalten wahr? Wählen Sie alle zutreffenden Optionen aus.",
+            "options": [
+              "Die App ermöglicht es Benutzern, Live-Unterhaltung zu streamen.",
+              "Die App hilft bei der Ausrichtung der Schüssel während der Installation.",
+              "Sie zeigt die Signalstärke und den Konnektivitätsstatus an."
+            ],
+            "multi": true,
+            "answers": [
+              1,
+              2
+            ]
+          }
+        ]
+      }
+      </script>
+    </section>
+
+    <section class="step" data-step>
+      <h1>Dauerhafte Montage</h1>
+      <div class="lead"><p>Sieh dir das folgende Video vollständig an, um fortzufahren.</p></div>
+      <div class="player">
+        <video playsinline preload="metadata" controlslist="nodownload noplaybackrate noremoteplayback" disablepictureinpicture oncontextmenu="return false">
+          <source src="../media/modul-2-standard-install.mp4" type="video/mp4" />
+          Ihr Browser kann dieses Video nicht abspielen.
+        </video>
+        <div class="vhint">Vorspulen ist deaktiviert</div>
+        <button class="bigplay" aria-label="Video abspielen"><span><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span></button>
+        <div class="vbar">
+          <button class="pp" aria-label="Abspielen/Pause"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></button>
+          <div class="vtrack"><i></i></div>
+          <span class="vtime">00:00 / 00:00</span>
+        </div>
+      </div>
+      <div class="watchnote">
+        <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>
+        <span class="t">Bitte sieh dir das Video vollständig an, um fortzufahren.</span>
+      </div>
+    </section>
+
+    <section class="step" data-step>
+      <h1>Installation der Starlink Standard-Wandhalterung</h1>
+      <div class="lead"><p>Sieh dir das folgende Video vollständig an, um fortzufahren.</p></div>
+      <div class="player">
+        <video playsinline preload="metadata" controlslist="nodownload noplaybackrate noremoteplayback" disablepictureinpicture oncontextmenu="return false">
+          <source src="../media/modul-2-wall-mount.mp4" type="video/mp4" />
+          Ihr Browser kann dieses Video nicht abspielen.
+        </video>
+        <div class="vhint">Vorspulen ist deaktiviert</div>
+        <button class="bigplay" aria-label="Video abspielen"><span><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span></button>
+        <div class="vbar">
+          <button class="pp" aria-label="Abspielen/Pause"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></button>
+          <div class="vtrack"><i></i></div>
+          <span class="vtime">00:00 / 00:00</span>
+        </div>
+      </div>
+      <div class="watchnote">
+        <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>
+        <span class="t">Bitte sieh dir das Video vollständig an, um fortzufahren.</span>
+      </div>
+    </section>
+
+    <section class="step" data-step>
+      <h1>Starlink-Ausrichtung</h1>
+      <div class="lead"><p>Sieh dir das folgende Video vollständig an, um fortzufahren.</p></div>
+      <div class="player">
+        <video playsinline preload="metadata" controlslist="nodownload noplaybackrate noremoteplayback" disablepictureinpicture oncontextmenu="return false">
+          <source src="../media/modul-2-alignment.mp4" type="video/mp4" />
+          Ihr Browser kann dieses Video nicht abspielen.
+        </video>
+        <div class="vhint">Vorspulen ist deaktiviert</div>
+        <button class="bigplay" aria-label="Video abspielen"><span><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span></button>
+        <div class="vbar">
+          <button class="pp" aria-label="Abspielen/Pause"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></button>
+          <div class="vtrack"><i></i></div>
+          <span class="vtime">00:00 / 00:00</span>
+        </div>
+      </div>
+      <div class="watchnote">
+        <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>
+        <span class="t">Bitte sieh dir das Video vollständig an, um fortzufahren.</span>
+      </div>
+    </section>
+
+    <section class="step" data-step>
+      <h1>Starlink-Störungen</h1>
+      <div class="lead"><p>Sieh dir das folgende Video vollständig an, um fortzufahren.</p></div>
+      <div class="player">
+        <video playsinline preload="metadata" controlslist="nodownload noplaybackrate noremoteplayback" disablepictureinpicture oncontextmenu="return false">
+          <source src="../media/modul-2-obstructions.mp4" type="video/mp4" />
+          Ihr Browser kann dieses Video nicht abspielen.
+        </video>
+        <div class="vhint">Vorspulen ist deaktiviert</div>
+        <button class="bigplay" aria-label="Video abspielen"><span><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span></button>
+        <div class="vbar">
+          <button class="pp" aria-label="Abspielen/Pause"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></button>
+          <div class="vtrack"><i></i></div>
+          <span class="vtime">00:00 / 00:00</span>
+        </div>
+      </div>
+      <div class="watchnote">
+        <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>
+        <span class="t">Bitte sieh dir das Video vollständig an, um fortzufahren.</span>
+      </div>
+    </section>
+
+    <section class="step" data-step>
+      <h1>Schwenkbare Halterung für die Starlink-Installation</h1>
+      <div class="lead"><p>Sieh dir das folgende Video vollständig an, um fortzufahren.</p></div>
+      <div class="player">
+        <video playsinline preload="metadata" controlslist="nodownload noplaybackrate noremoteplayback" disablepictureinpicture oncontextmenu="return false">
+          <source src="../media/modul-2-pivot-mount.mp4" type="video/mp4" />
+          Ihr Browser kann dieses Video nicht abspielen.
+        </video>
+        <div class="vhint">Vorspulen ist deaktiviert</div>
+        <button class="bigplay" aria-label="Video abspielen"><span><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span></button>
+        <div class="vbar">
+          <button class="pp" aria-label="Abspielen/Pause"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></button>
+          <div class="vtrack"><i></i></div>
+          <span class="vtime">00:00 / 00:00</span>
+        </div>
+      </div>
+      <div class="watchnote">
+        <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>
+        <span class="t">Bitte sieh dir das Video vollständig an, um fortzufahren.</span>
+      </div>
+    </section>
+
+    <section class="step" data-step>
+      <h1>Starlink – Reboot-Anleitung</h1>
+      <div class="lead"><p>Sieh dir das folgende Video vollständig an, um fortzufahren.</p></div>
+      <div class="player">
+        <video playsinline preload="metadata" controlslist="nodownload noplaybackrate noremoteplayback" disablepictureinpicture oncontextmenu="return false">
+          <source src="../media/modul-2-reboot.mp4" type="video/mp4" />
+          Ihr Browser kann dieses Video nicht abspielen.
+        </video>
+        <div class="vhint">Vorspulen ist deaktiviert</div>
+        <button class="bigplay" aria-label="Video abspielen"><span><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span></button>
+        <div class="vbar">
+          <button class="pp" aria-label="Abspielen/Pause"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></button>
+          <div class="vtrack"><i></i></div>
+          <span class="vtime">00:00 / 00:00</span>
+        </div>
+      </div>
+      <div class="watchnote">
+        <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>
+        <span class="t">Bitte sieh dir das Video vollständig an, um fortzufahren.</span>
+      </div>
+    </section>
+
+    <section class="step" data-step>
+      <h1>Starlink – Durchführung eines Werksresets</h1>
+      <div class="lead"><p>Sieh dir das folgende Video vollständig an, um fortzufahren.</p></div>
+      <div class="player">
+        <video playsinline preload="metadata" controlslist="nodownload noplaybackrate noremoteplayback" disablepictureinpicture oncontextmenu="return false">
+          <source src="../media/modul-2-factory-reset.mp4" type="video/mp4" />
+          Ihr Browser kann dieses Video nicht abspielen.
+        </video>
+        <div class="vhint">Vorspulen ist deaktiviert</div>
+        <button class="bigplay" aria-label="Video abspielen"><span><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span></button>
+        <div class="vbar">
+          <button class="pp" aria-label="Abspielen/Pause"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></button>
+          <div class="vtrack"><i></i></div>
+          <span class="vtime">00:00 / 00:00</span>
+        </div>
+      </div>
+      <div class="watchnote">
+        <span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>
+        <span class="t">Bitte sieh dir das Video vollständig an, um fortzufahren.</span>
+      </div>
+    </section>
+
+    <section class="step" data-step>
+      <h1>Die Montage der Starlink-Schüssel</h1>
+      <div class="lead"><p>Beantworte die Frage richtig, um fortzufahren.</p></div>
+      <div class="quiz"></div>
+      <script type="application/json" data-quiz>
+      {
+        "module": "Modul 2 – Die Montage der Starlink-Schüssel",
+        "passPercent": 100,
+        "blockOnFail": true,
+        "questions": [
+          {
+            "q": "Welche der folgenden Vorgehensweisen stellt eine bewährte Methode bei der Montage der Starlink-Schüssel dar?",
+            "options": [
+              "Wählen Sie einen Standort inmitten vieler Bäume, um die Schüssel vor Wind zu schützen",
+              "Stellen Sie sicher, dass die Halterung eben, sicher ist und eine freie Sicht auf den Himmel bietet",
+              "Montieren Sie die Schüssel aus Bequemlichkeitsgründen im Inneren eines Fensters"
+            ],
+            "answer": 1
+          }
+        ]
+      }
+      </script>
+    </section>
+
+    <section class="step" data-step>
+      <h1>Leitfaden für die Starlink-Installation</h1>
+      <div class="lead"><p>Sieh dir die folgende Präsentation an. Blättere mit den Pfeilen oder per Wischen durch die Folien.</p></div>
+      <div class="slides" data-base="../slides/best-practices/slide-" data-count="18">
+        <div class="sstage"></div>
+        <div class="scontrols">
+          <button class="snav" data-dir="-1" aria-label="Vorherige Folie"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+          <div class="scount"><b class="scur">1</b> / 18</div>
+          <button class="snav" data-dir="1" aria-label="Nächste Folie"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="step" data-step>
+      <h1>Wissensüberprüfung – Best Practices für die Installation</h1>
+      <div class="lead"><p>Beantworte alle Fragen richtig, um Modul 2 abzuschließen. Bei Fehlern kannst du es erneut versuchen.</p></div>
+      <div class="quiz"></div>
+      <script type="application/json" data-quiz>
+      {
+        "module": "Modul 2 – Wissensüberprüfung Best Practices",
+        "passPercent": 100,
+        "blockOnFail": true,
+        "questions": [
+          {
+            "q": "Gemäß dem Installationsvideo, was ist zu tun, um eine ordnungsgemäße Verlegung des Starlink-Kabels sicherzustellen?",
+            "options": [
+              "Stellen Sie sicher, dass das Kabel lang genug ist und etwas Spielraum für Wärme- und Kälteausdehnung bietet.",
+              "Knicken Sie das Kabel, damit es sich eng um Ecken legt.",
+              "Verlegen Sie das Kabel durch Wasserrohre für zusätzlichen Schutz."
+            ],
+            "answer": 0
+          },
+          {
+            "q": "Was ist der korrekte Ansatz zur Verlegung und zum Schutz von Starlink-Kabeln?",
+            "options": [
+              "Verwenden Sie scharfe Biegungen, um Kabel zu verbergen.",
+              "Befestigen Sie Kabel ordentlich mit Clips oder Kabelkanälen und schützen Sie alle Eintrittspunkte vor Witterungseinflüssen.",
+              "Lassen Sie Kabel bis zum Ende der Arbeit frei draußen laufen."
+            ],
+            "answer": 1
+          },
+          {
+            "q": "Was ist in einer Standortbegehung/-bewertung enthalten? Mehrfachauswahl möglich.",
+            "options": [
+              "Verwenden Sie die Starlink-App, um auf Hindernisse zu prüfen",
+              "Erläutern Sie dem Kunden die Platzierungsempfehlungen",
+              "Identifizieren Sie den optimalen Montageort"
+            ],
+            "multi": true,
+            "answers": [
+              0,
+              1,
+              2
+            ]
+          },
+          {
+            "q": "Am Ende einer Installation, wie können Sie die Kundenzufriedenheit am besten sicherstellen? Wählen Sie eine Option aus.",
+            "options": [
+              "Demonstrieren Sie die Starlink-App, erläutern Sie grundlegende Fehlerbehebungsschritte und beantworten Sie alle Fragen.",
+              "Verlassen Sie den Einsatzort sofort.",
+              "Überspringen Sie den Geschwindigkeitstest, da das System bereits aktiv ist."
+            ],
+            "answer": 0
+          },
+          {
+            "q": "Welche Leistungstests müssen Sie durchführen?",
+            "options": [
+              "Geschwindigkeit",
+              "Verbindung",
+              "Abdeckung",
+              "Alle oben genannten"
+            ],
+            "answer": 3
+          }
+        ]
+      }
+      </script>
     </section>
 
     <!-- ===== Navigation ===== -->
@@ -85,7 +384,7 @@
         Zurück
       </button>
       <div class="progress">
-        <div class="label">Schritt <b id="cur">1</b> von <span id="total">3</span></div>
+        <div class="label">Schritt <b id="cur">1</b> von <span id="total">14</span></div>
         <div class="bar"><i id="fill"></i></div>
       </div>
       <button class="btn btn-primary" id="next">
@@ -95,6 +394,7 @@
     </div>
   </main>
 
+<script src="../assets/quiz.js"></script>
 <script src="../assets/module.js"></script>
 </body>
 </html>
