@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="robots" content="noindex" />
+<title>Modul 1 – Das Starlink-Zertifizierungsprogramm</title>
+<link rel="stylesheet" href="../assets/module.css" />
+</head>
+<body>
+  <main class="wrap">
+    <span class="eyebrow">Modul 1</span>
+
+    <!-- ===== Schritt 1: Einführung + Video ===== -->
+    <section class="step active" data-step>
+      <h1>Das Starlink-Zertifizierungsprogramm</h1>
+      <div class="lead">
+        <p>Das Programm zielt darauf ab, ein umfassendes Wissen in verschiedenen Themenbereichen und damit einhergehende Fähigkeiten zu vermitteln. Es besteht aus mehreren Schulungsmodulen, die auf spezifische Wissensfelder ausgerichtet sind, und stattet Personen mit den notwendigen Werkzeugen und dem erforderlichen Wissen aus, um bestmögliche Ergebnisse zu erzielen.</p>
+        <p>Jedes Modul beinhaltet in der Regel eine Mischung aus Lehrmaterialien, darunter Videos, Anleitungen und weiteren Aktivitäten, um die Lernenden bestmöglich vorzubereiten. Die Inhalte sind so gestaltet, dass sie ein schrittweises Lernen fördern, ergänzt durch Wissensüberprüfungen, die das Verständnis vertiefen und das Wissen festigen.</p>
+      </div>
+
+      <div class="video">
+        <video controls preload="metadata" playsinline controlslist="nodownload">
+          <source src="../media/modul-1-zertifizierungsprogramm.mp4" type="video/mp4" />
+          Ihr Browser kann dieses Video nicht abspielen.
+        </video>
+      </div>
+    </section>
+
+    <!-- Weitere Schritte hier einfügen:
+    <section class="step" data-step>
+      <h2>Überschrift</h2>
+      <div class="lead"><p>…</p></div>
+    </section>
+    -->
+
+    <!-- ===== Navigation (blendet sich bei nur einem Schritt aus) ===== -->
+    <div class="controls" id="controls">
+      <button class="btn btn-ghost" id="prev">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Zurück
+      </button>
+      <div class="progress">
+        <div class="label">Schritt <b id="cur">1</b> von <span id="total">1</span></div>
+        <div class="bar"><i id="fill"></i></div>
+      </div>
+      <button class="btn btn-primary" id="next">
+        Weiter
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </main>
+
+<script>
+(function(){
+  "use strict";
+  var steps = Array.prototype.slice.call(document.querySelectorAll("[data-step]"));
+  var controls = document.getElementById("controls");
+  var prev = document.getElementById("prev");
+  var next = document.getElementById("next");
+  var curEl = document.getElementById("cur");
+  var totalEl = document.getElementById("total");
+  var fill = document.getElementById("fill");
+
+  var TOTAL = steps.length;
+  var i = 0;
+  totalEl.textContent = TOTAL;
+
+  // Bei nur einem Schritt: keine Navigation nötig
+  if(TOTAL <= 1){ controls.classList.add("single"); return; }
+
+  function render(){
+    steps.forEach(function(s,n){ s.classList.toggle("active", n===i); });
+    curEl.textContent = i+1;
+    fill.style.width = ((i+1)/TOTAL*100) + "%";
+    prev.disabled = (i===0);
+    next.disabled = (i===TOTAL-1);
+    // an den Anfang des iframes scrollen
+    window.scrollTo({ top:0, behavior:"smooth" });
+  }
+  prev.addEventListener("click", function(){ if(i>0){ i--; render(); } });
+  next.addEventListener("click", function(){ if(i<TOTAL-1){ i++; render(); } });
+  render();
+})();
+</script>
+</body>
+</html>

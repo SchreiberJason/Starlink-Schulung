@@ -1,0 +1,153 @@
+/* =========================================================
+   Helferline – gemeinsames Designsystem für alle Module
+   (iframe-tauglich, responsive, kein Header/Footer)
+   Markenfarbe aus dem Helferline-Logo: #088bcc (Blau)
+   ========================================================= */
+:root{
+  --brand:       #088bcc;   /* Helferline-Blau */
+  --brand-dark:  #0670a3;
+  --brand-soft:  #e6f4fb;
+  --navy:        #0d2d5f;    /* dunkelblau wie die Folien */
+  --bg:          #ffffff;
+  --surface:     #f4f7fb;
+  --text:        #16243d;
+  --text-soft:   #5a6b85;
+  --border:      #e3e8f0;
+  --radius:      16px;
+  --radius-sm:   12px;
+  --shadow:      0 8px 30px rgba(13,45,95,.14);
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent; }
+html,body{ height:100%; }
+body{
+  font-family:var(--font);
+  color:var(--text);
+  background:var(--bg);
+  line-height:1.6;
+  padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+.wrap{
+  max-width:860px;
+  margin:0 auto;
+  padding:26px 20px 28px;
+  display:flex;
+  flex-direction:column;
+  min-height:100%;
+}
+
+/* kleines Modul-Label oben */
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  align-self:flex-start;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  color:var(--brand);
+  background:var(--brand-soft);
+  padding:6px 12px;
+  border-radius:99px;
+  margin-bottom:18px;
+}
+
+/* Schritt-Inhalt */
+.step{ display:none; animation:fade .3s ease; }
+.step.active{ display:block; }
+@keyframes fade{ from{ opacity:0; transform:translateY(6px); } to{ opacity:1; transform:none; } }
+
+h1{
+  font-size:clamp(26px, 5vw, 38px);
+  line-height:1.15;
+  font-weight:800;
+  color:var(--navy);
+  letter-spacing:-.01em;
+  margin-bottom:18px;
+}
+h2{
+  font-size:clamp(20px, 3.5vw, 26px);
+  font-weight:800;
+  color:var(--navy);
+  margin:8px 0 14px;
+}
+.lead p{
+  font-size:clamp(16px, 2.3vw, 18px);
+  color:var(--text);
+  margin-bottom:16px;
+}
+.lead p:last-child{ margin-bottom:0; }
+
+/* Video */
+.video{
+  margin-top:24px;
+  width:100%;
+  aspect-ratio:16/9;
+  background:var(--navy);
+  border-radius:var(--radius);
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.video video{ width:100%; height:100%; display:block; object-fit:contain; background:#000; }
+
+/* Steuerleiste */
+.controls{
+  margin-top:auto;
+  padding-top:26px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.controls.single{ display:none; }   /* bei nur einem Schritt ausblenden */
+
+.progress{
+  flex:1 1 auto;
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+  min-width:0;
+}
+.progress .label{
+  font-size:13px;
+  font-weight:600;
+  color:var(--text-soft);
+}
+.progress .label b{ color:var(--navy); }
+.bar{ height:6px; background:var(--surface); border-radius:99px; overflow:hidden; }
+.bar > i{ display:block; height:100%; width:0; background:var(--brand); border-radius:99px; transition:width .3s ease; }
+
+/* Buttons */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  padding:13px 22px;
+  border-radius:var(--radius-sm);
+  font-size:15px;
+  font-weight:700;
+  font-family:inherit;
+  text-decoration:none;
+  cursor:pointer;
+  border:1px solid transparent;
+  transition:background .15s, border-color .15s, color .15s, transform .05s, opacity .15s;
+  white-space:nowrap;
+}
+.btn:active{ transform:scale(.985); }
+.btn svg{ width:18px; height:18px; flex:0 0 auto; }
+.btn-primary{ background:var(--brand); color:#fff; }
+.btn-primary:hover{ background:var(--brand-dark); }
+.btn-ghost{ background:var(--bg); color:var(--navy); border-color:var(--border); }
+.btn-ghost:hover{ border-color:var(--brand); color:var(--brand); }
+.btn:disabled{ opacity:.4; cursor:default; }
+.btn:disabled:hover{ background:var(--brand); }
+.btn-ghost:disabled:hover{ background:var(--bg); color:var(--navy); border-color:var(--border); }
+
+@media (max-width:560px){
+  .wrap{ padding:18px 14px 20px; }
+  .video{ border-radius:12px; }
+  .btn{ padding:12px 16px; font-size:14px; }
+}

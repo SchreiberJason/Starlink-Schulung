@@ -8,8 +8,8 @@
 <style>
   /* ===== Helferline-Stil – zentrale Variablen (hier anpassen) ===== */
   :root{
-    --brand:        #ff5c00;   /* Helferline-Orange */
-    --brand-dark:   #e04f00;
+    --brand:        #088bcc;   /* Helferline-Blau */
+    --brand-dark:   #0670a3;
     --navy:         #0d2d5f;   /* dunkelblau wie die Folien */
     --bg:           #ffffff;
     --surface:      #f4f6fa;
@@ -166,41 +166,6 @@
     transition:width .25s ease;
   }
 
-  /* ===== Download-Leiste ===== */
-  .actions{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-  }
-  .btn{
-    flex:1 1 auto;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:9px;
-    padding:13px 18px;
-    border-radius:var(--radius);
-    font-size:15px;
-    font-weight:700;
-    text-decoration:none;
-    cursor:pointer;
-    border:1px solid transparent;
-    transition:background .15s, border-color .15s, transform .05s, color .15s;
-  }
-  .btn:active{ transform:scale(.985); }
-  .btn-primary{
-    background:var(--brand);
-    color:#fff;
-  }
-  .btn-primary:hover{ background:var(--brand-dark); }
-  .btn-ghost{
-    background:var(--surface);
-    color:var(--navy);
-    border-color:var(--border);
-  }
-  .btn-ghost:hover{ border-color:var(--brand); color:var(--brand); }
-  .btn svg{ width:19px; height:19px; flex:0 0 auto; }
-
   /* ===== Responsiv ===== */
   @media (max-width:560px){
     .app{ padding:10px 10px 14px; gap:11px; }
@@ -208,10 +173,6 @@
     .edge{ display:none; }            /* am Handy nur Wischen + Buttons */
     .nav-btn{ width:44px; height:44px; }
     .btn{ font-size:14px; padding:12px 14px; }
-  }
-  /* sehr schmal: Buttons untereinander */
-  @media (max-width:380px){
-    .actions{ flex-direction:column; }
   }
 </style>
 </head>
@@ -239,14 +200,6 @@
       <button class="nav-btn" id="next" aria-label="Weiter">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
       </button>
-    </div>
-
-    <!-- Aktionen -->
-    <div class="actions">
-      <a class="btn btn-primary" id="download" href="Starlink-Installation-Best-Practices.pdf" download>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Präsentation herunterladen (PDF)
-      </a>
     </div>
   </main>
 
