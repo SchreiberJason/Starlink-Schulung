@@ -282,6 +282,82 @@ h2{
 .placeholder b{ color:var(--navy); font-size:16px; }
 .placeholder span{ font-size:14px; }
 
+/* ===== Quiz / Wissensüberprüfung ===== */
+.q{
+  margin-top:18px;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  background:var(--bg);
+  padding:18px;
+}
+.q.missing{ border-color:#e0a32e; background:#fff8ec; }
+.qhead{ display:flex; gap:12px; align-items:flex-start; margin-bottom:14px; }
+.qnum{
+  flex:0 0 auto;
+  width:28px; height:28px; border-radius:50%;
+  background:var(--brand); color:#fff;
+  font-size:14px; font-weight:800;
+  display:flex; align-items:center; justify-content:center;
+}
+.qtext{ font-size:clamp(16px,2.2vw,18px); font-weight:700; color:var(--navy); padding-top:2px; }
+.opts{ display:flex; flex-direction:column; gap:9px; }
+.opt{
+  display:flex; align-items:center; gap:12px;
+  width:100%; text-align:left;
+  padding:13px 15px;
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  background:var(--bg);
+  font-family:inherit; font-size:15px; color:var(--text);
+  cursor:pointer;
+  transition:border-color .12s, background .12s;
+}
+.opt:hover{ border-color:var(--brand); }
+.opt .mark{
+  flex:0 0 auto;
+  width:20px; height:20px; border-radius:50%;
+  border:2px solid var(--border);
+  display:flex; align-items:center; justify-content:center;
+  transition:border-color .12s, background .12s;
+}
+.opt.sel{ border-color:var(--brand); background:var(--brand-soft); }
+.opt.sel .mark{ border-color:var(--brand); background:var(--brand); box-shadow:inset 0 0 0 3px #fff; }
+/* nach dem Absenden */
+.opt.correct{ border-color:#1f9d55; background:#e7f3ea; }
+.opt.correct .mark{ border-color:#1f9d55; background:#1f9d55; }
+.opt.wrong{ border-color:#d23f3f; background:#fbeaea; }
+.opt.wrong .mark{ border-color:#d23f3f; background:#d23f3f; }
+.opts.locked .opt{ cursor:default; }
+.opts.locked .opt:hover{ border-color:var(--border); }
+.opts.locked .opt.sel{ border-color:var(--brand); }
+.opts.locked .opt.correct{ border-color:#1f9d55; }
+.opts.locked .opt.wrong{ border-color:#d23f3f; }
+
+.quizbar{
+  margin-top:22px;
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+}
+.quizbar .count{ font-size:14px; font-weight:600; color:var(--text-soft); }
+
+.result{
+  margin-top:20px;
+  border-radius:var(--radius);
+  padding:18px;
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+  border:1px solid var(--border);
+}
+.result .ic{ flex:0 0 auto; width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; }
+.result .txt{ flex:1 1 220px; }
+.result .txt b{ display:block; font-size:17px; }
+.result .txt span{ font-size:14px; color:var(--text-soft); }
+.result.pass{ background:#e7f3ea; border-color:#cfe9d8; }
+.result.pass .ic{ background:#1f9d55; color:#fff; }
+.result.pass .txt b{ color:#157a40; }
+.result.fail{ background:#fbeaea; border-color:#f0cdcd; }
+.result.fail .ic{ background:#d23f3f; color:#fff; }
+.result.fail .txt b{ color:#a82c2c; }
+.result .ic svg{ width:24px; height:24px; }
+
 /* ===== Anweisungs-Listen (Kursanweisungen) ===== */
 .steps-list, .tips-list{ margin:4px 0 22px; padding-left:0; list-style:none; }
 .steps-list{ counter-reset:s; }

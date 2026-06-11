@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="robots" content="noindex" />
+<title>Wissensüberprüfung – Demo</title>
+<link rel="stylesheet" href="../assets/module.css" />
+</head>
+<body>
+  <main class="wrap">
+    <span class="eyebrow">Wissensüberprüfung · Demo</span>
+    <h1>Beispiel-Quiz</h1>
+    <div class="lead">
+      <p>Beantworte alle Fragen und sende sie ab. Dies ist eine Demo – die Antworten werden noch nicht gespeichert, sondern nur in der Browser-Konsole angezeigt.</p>
+    </div>
+
+    <div id="quiz"></div>
+  </main>
+
+  <script>
+    window.QUIZ = {
+      module: "Demo – Wissensüberprüfung",
+      endpoint: "",            // leer = Demo-Modus (kein Speichern). Später: Apps-Script-URL eintragen.
+      secret: "",
+      passPercent: 67,
+      blockOnFail: true,
+      endEvent: "videoCompleted",
+      questions: [
+        {
+          q: "Wie viel freie Sicht zum Himmel sollte für eine Starlink-Installation mindestens vorhanden sein?",
+          options: ["Egal, Hindernisse stören nicht", "Etwa 100° freies Sichtfeld", "Nur direkt nach Süden"],
+          answer: 1
+        },
+        {
+          q: "Womit prüft man Hindernisse vor der Montage am besten?",
+          options: ["Mit bloßem Auge schätzen", "Mit der Starlink-App (Hindernischeck)", "Gar nicht nötig"],
+          answer: 1
+        },
+        {
+          q: "Was gehört zu einer sauberen Installation?",
+          options: ["Kabelführung und ordnungsgemäße Erdung", "Kabel lose über das Dach legen", "Erdung weglassen"],
+          answer: 0
+        }
+      ]
+    };
+  </script>
+  <script src="../assets/quiz.js"></script>
+</body>
+</html>
