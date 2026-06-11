@@ -81,17 +81,115 @@ h2{
 }
 .lead p:last-child{ margin-bottom:0; }
 
-/* Video */
-.video{
+/* ===== Video-Player (anschaupflichtig, kein Vorspulen) ===== */
+.player{
+  position:relative;
   margin-top:24px;
   width:100%;
   aspect-ratio:16/9;
-  background:var(--navy);
+  background:#000;
   border-radius:var(--radius);
   overflow:hidden;
   box-shadow:var(--shadow);
 }
-.video video{ width:100%; height:100%; display:block; object-fit:contain; background:#000; }
+.player video{
+  width:100%; height:100%;
+  display:block;
+  object-fit:contain;
+  background:#000;
+}
+
+/* großer Play-Button (Overlay) */
+.bigplay{
+  position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(13,45,95,.35);
+  border:0; cursor:pointer;
+  transition:opacity .2s;
+  z-index:3;
+}
+.bigplay.hide{ opacity:0; pointer-events:none; }
+.bigplay span{
+  width:74px; height:74px;
+  border-radius:50%;
+  background:var(--brand);
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 6px 20px rgba(0,0,0,.35);
+  transition:transform .1s, background .15s;
+}
+.bigplay:hover span{ background:var(--brand-dark); transform:scale(1.05); }
+.bigplay svg{ width:30px; height:30px; margin-left:4px; }
+
+/* Steuerleiste unten im Player */
+.vbar{
+  position:absolute; left:0; right:0; bottom:0;
+  display:flex; align-items:center; gap:12px;
+  padding:11px 14px;
+  background:linear-gradient(transparent, rgba(0,0,0,.7));
+  z-index:2;
+}
+.vbar .pp{
+  flex:0 0 auto;
+  width:38px; height:38px;
+  border:0; border-radius:50%;
+  background:rgba(255,255,255,.16);
+  color:#fff; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:background .15s;
+}
+.vbar .pp:hover{ background:var(--brand); }
+.vbar .pp svg{ width:18px; height:18px; }
+/* nicht klickbarer Fortschrittsbalken (kein Spulen) */
+.vtrack{
+  flex:1 1 auto;
+  height:6px;
+  background:rgba(255,255,255,.25);
+  border-radius:99px;
+  overflow:hidden;
+  pointer-events:none;            /* verhindert Klick-Seeking */
+}
+.vtrack > i{ display:block; height:100%; width:0; background:var(--brand); border-radius:99px; }
+.vtime{
+  flex:0 0 auto;
+  font-size:13px; font-weight:700;
+  color:#fff;
+  font-variant-numeric:tabular-nums;
+  min-width:96px; text-align:right;
+}
+
+/* kleiner Hinweis „Vorspulen deaktiviert" */
+.vhint{
+  position:absolute; top:12px; left:50%; transform:translateX(-50%);
+  background:rgba(13,45,95,.85); color:#fff;
+  font-size:12px; font-weight:600;
+  padding:7px 13px; border-radius:99px;
+  opacity:0; pointer-events:none;
+  transition:opacity .25s;
+  z-index:4; white-space:nowrap;
+}
+.vhint.show{ opacity:1; }
+
+/* Abschluss-Box (erscheint nach vollständigem Ansehen) */
+.complete{
+  margin-top:20px;
+  border:1px solid var(--border);
+  background:var(--surface);
+  border-radius:var(--radius);
+  padding:18px;
+  display:flex; align-items:center; gap:14px;
+  flex-wrap:wrap;
+}
+.complete .ic{
+  flex:0 0 auto;
+  width:42px; height:42px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  background:#e7f3ea; color:#1f9d55;
+}
+.complete.locked .ic{ background:var(--surface); color:var(--text-soft); border:1px solid var(--border); }
+.complete .txt{ flex:1 1 200px; }
+.complete .txt b{ display:block; color:var(--navy); font-size:15px; }
+.complete .txt span{ font-size:13px; color:var(--text-soft); }
+.complete .btn{ flex:0 0 auto; }
 
 /* Steuerleiste */
 .controls{

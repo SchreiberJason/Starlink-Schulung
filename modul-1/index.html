@@ -11,7 +11,6 @@
   <main class="wrap">
     <span class="eyebrow">Modul 1</span>
 
-    <!-- ===== Schritt 1: Einführung + Video ===== -->
     <section class="step active" data-step>
       <h1>Das Starlink-Zertifizierungsprogramm</h1>
       <div class="lead">
@@ -19,68 +18,160 @@
         <p>Jedes Modul beinhaltet in der Regel eine Mischung aus Lehrmaterialien, darunter Videos, Anleitungen und weiteren Aktivitäten, um die Lernenden bestmöglich vorzubereiten. Die Inhalte sind so gestaltet, dass sie ein schrittweises Lernen fördern, ergänzt durch Wissensüberprüfungen, die das Verständnis vertiefen und das Wissen festigen.</p>
       </div>
 
-      <div class="video">
-        <video controls preload="metadata" playsinline controlslist="nodownload">
+      <!-- Anschaupflichtiger Player: kein Vorspulen, mitlaufender Timer -->
+      <div class="player" id="player">
+        <video id="vid" playsinline preload="metadata"
+               controlslist="nodownload noplaybackrate noremoteplayback"
+               disablepictureinpicture oncontextmenu="return false">
           <source src="../media/modul-1-zertifizierungsprogramm.mp4" type="video/mp4" />
           Ihr Browser kann dieses Video nicht abspielen.
         </video>
+
+        <div class="vhint" id="vhint">Vorspulen ist deaktiviert</div>
+
+        <button class="bigplay" id="bigplay" aria-label="Video abspielen">
+          <span><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
+        </button>
+
+        <div class="vbar">
+          <button class="pp" id="pp" aria-label="Abspielen/Pause">
+            <svg id="ppIcon" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <div class="vtrack"><i id="vfill"></i></div>
+          <span class="vtime" id="vtime">00:00 / 00:00</span>
+        </div>
+      </div>
+
+      <!-- Abschluss: erst nach vollständigem Ansehen aktiv -->
+      <div class="complete locked" id="complete">
+        <div class="ic" id="cIc">
+          <svg id="cIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+        </div>
+        <div class="txt">
+          <b id="cTitle">Bitte sieh dir das Video vollständig an</b>
+          <span id="cSub">Die Aufgabe kann erst danach abgeschlossen werden.</span>
+        </div>
+        <button class="btn btn-primary" id="finish" disabled>
+          Aufgabe abschließen
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </button>
       </div>
     </section>
-
-    <!-- Weitere Schritte hier einfügen:
-    <section class="step" data-step>
-      <h2>Überschrift</h2>
-      <div class="lead"><p>…</p></div>
-    </section>
-    -->
-
-    <!-- ===== Navigation (blendet sich bei nur einem Schritt aus) ===== -->
-    <div class="controls" id="controls">
-      <button class="btn btn-ghost" id="prev">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-        Zurück
-      </button>
-      <div class="progress">
-        <div class="label">Schritt <b id="cur">1</b> von <span id="total">1</span></div>
-        <div class="bar"><i id="fill"></i></div>
-      </div>
-      <button class="btn btn-primary" id="next">
-        Weiter
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-      </button>
-    </div>
   </main>
 
 <script>
 (function(){
   "use strict";
-  var steps = Array.prototype.slice.call(document.querySelectorAll("[data-step]"));
-  var controls = document.getElementById("controls");
-  var prev = document.getElementById("prev");
-  var next = document.getElementById("next");
-  var curEl = document.getElementById("cur");
-  var totalEl = document.getElementById("total");
-  var fill = document.getElementById("fill");
 
-  var TOTAL = steps.length;
-  var i = 0;
-  totalEl.textContent = TOTAL;
+  /* Fountain "End event": muss exakt dem Wert im Fountain-Feld entsprechen.
+     Standard: "videoCompleted". Per ?endEvent=... überschreibbar. */
+  var params = new URLSearchParams(location.search);
+  var END_EVENT = params.get("endEvent") || "videoCompleted";
 
-  // Bei nur einem Schritt: keine Navigation nötig
-  if(TOTAL <= 1){ controls.classList.add("single"); return; }
+  var vid    = document.getElementById("vid");
+  var player = document.getElementById("player");
+  var bigplay= document.getElementById("bigplay");
+  var pp     = document.getElementById("pp");
+  var ppIcon = document.getElementById("ppIcon");
+  var vfill  = document.getElementById("vfill");
+  var vtime  = document.getElementById("vtime");
+  var vhint  = document.getElementById("vhint");
+  var box    = document.getElementById("complete");
+  var cIcon  = document.getElementById("cIcon");
+  var cIc    = document.getElementById("cIc");
+  var cTitle = document.getElementById("cTitle");
+  var cSub   = document.getElementById("cSub");
+  var finish = document.getElementById("finish");
 
-  function render(){
-    steps.forEach(function(s,n){ s.classList.toggle("active", n===i); });
-    curEl.textContent = i+1;
-    fill.style.width = ((i+1)/TOTAL*100) + "%";
-    prev.disabled = (i===0);
-    next.disabled = (i===TOTAL-1);
-    // an den Anfang des iframes scrollen
-    window.scrollTo({ top:0, behavior:"smooth" });
+  var PLAY  = "M8 5v14l11-7z";
+  var PAUSE = "M6 5h4v14H6zM14 5h4v14h-4z";
+
+  var maxT = 0;        // am weitesten angesehene Stelle (Sekunden)
+  var watched = false; // Video vollständig gesehen?
+  var hintTimer = null;
+
+  function fmt(s){
+    if(!isFinite(s) || s<0) s=0;
+    var m=Math.floor(s/60), r=Math.floor(s%60);
+    return (m<10?"0":"")+m+":"+(r<10?"0":"")+r;
   }
-  prev.addEventListener("click", function(){ if(i>0){ i--; render(); } });
-  next.addEventListener("click", function(){ if(i<TOTAL-1){ i++; render(); } });
-  render();
+  function showHint(){
+    vhint.classList.add("show");
+    clearTimeout(hintTimer);
+    hintTimer = setTimeout(function(){ vhint.classList.remove("show"); }, 1600);
+  }
+  function setPlayIcon(playing){
+    ppIcon.setAttribute("d", playing ? PAUSE : PLAY);
+  }
+
+  function update(){
+    var d = vid.duration || 0;
+    vfill.style.width = d ? (vid.currentTime/d*100)+"%" : "0%";
+    vtime.textContent = fmt(vid.currentTime) + " / " + fmt(d);
+  }
+
+  // Vorspulen verhindern: nie über die bereits gesehene Stelle hinaus springen
+  vid.addEventListener("timeupdate", function(){
+    if(vid.currentTime > maxT + 0.5){
+      vid.currentTime = maxT;       // Sprung nach vorne -> zurücksetzen
+      showHint();
+    } else {
+      if(vid.currentTime > maxT) maxT = vid.currentTime;
+    }
+    update();
+  });
+  vid.addEventListener("seeking", function(){
+    if(vid.currentTime > maxT + 0.5){
+      vid.currentTime = maxT;
+      showHint();
+    }
+  });
+  vid.addEventListener("loadedmetadata", update);
+
+  // Play / Pause
+  function toggle(){ if(vid.paused) vid.play(); else vid.pause(); }
+  bigplay.addEventListener("click", toggle);
+  pp.addEventListener("click", toggle);
+  vid.addEventListener("play",  function(){ bigplay.classList.add("hide"); setPlayIcon(true); });
+  vid.addEventListener("pause", function(){ if(!vid.ended) bigplay.classList.remove("hide"); setPlayIcon(false); });
+
+  // Tastatur-Vorspulen unterbinden (Pfeile etc.), Leertaste = Play/Pause
+  vid.addEventListener("keydown", function(e){
+    if(e.key === " " || e.key === "k"){ e.preventDefault(); toggle(); }
+    else { e.preventDefault(); }
+  });
+
+  // Vollständig angesehen
+  vid.addEventListener("ended", function(){
+    watched = true;
+    bigplay.classList.remove("hide");   // erlaubt erneutes Ansehen
+    setPlayIcon(false);
+    box.classList.remove("locked");
+    cIc.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+    cTitle.textContent = "Video vollständig angesehen";
+    cSub.textContent = "Du kannst die Aufgabe jetzt abschließen.";
+    finish.disabled = false;
+  });
+
+  // Abschluss -> Fountain benachrichtigen (mehrere Formate für Kompatibilität)
+  function notifyFountain(){
+    var p = window.parent;
+    if(!p) return;
+    try{ p.postMessage(END_EVENT, "*"); }catch(e){}
+    try{ p.postMessage({ event: END_EVENT }, "*"); }catch(e){}
+    try{ p.postMessage({ type:  END_EVENT }, "*"); }catch(e){}
+    try{ p.postMessage({ name:  END_EVENT }, "*"); }catch(e){}
+    try{ p.postMessage(JSON.stringify({ event: END_EVENT }), "*"); }catch(e){}
+  }
+  finish.addEventListener("click", function(){
+    if(!watched) return;
+    notifyFountain();
+    finish.disabled = true;
+    cTitle.textContent = "Abgeschlossen ✓";
+    cSub.textContent = "Du wirst zur nächsten Aufgabe weitergeleitet …";
+  });
+
+  update();
 })();
 </script>
 </body>
