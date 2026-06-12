@@ -360,6 +360,58 @@ h2{
 .result.fail .txt b{ color:#a82c2c; }
 .result .ic svg{ width:24px; height:24px; }
 
+/* ===== Sondermodul: Lang-Inhalte ===== */
+.hero{ width:100%; aspect-ratio:16/9; border-radius:var(--radius); overflow:hidden; background:#000; margin-bottom:18px; box-shadow:var(--shadow); }
+.hero img{ width:100%; height:100%; object-fit:cover; display:block; }
+.body{ font-size:clamp(15px,2.1vw,17px); line-height:1.65; color:var(--text); margin:10px 0 18px; }
+.statement{ margin:28px 0; font-size:clamp(20px,3.4vw,26px); font-weight:800; color:var(--navy); line-height:1.3; }
+.statement::before{ content:""; display:block; width:48px; height:4px; background:var(--brand); border-radius:99px; margin-bottom:16px; }
+
+/* Zitat */
+.quote{ margin:26px 0; padding:16px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+.quote p{ font-size:clamp(17px,2.6vw,20px); font-style:italic; color:var(--navy); line-height:1.4; }
+.quote cite{ display:block; text-align:right; margin-top:10px; font-style:normal; font-weight:700; color:var(--text-soft); font-size:14px; }
+
+/* Tab-Wechsler */
+.tabs{ margin-top:16px; border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
+.tablist{ display:flex; overflow-x:auto; background:var(--surface); border-bottom:1px solid var(--border); -webkit-overflow-scrolling:touch; }
+.tab{ flex:0 0 auto; border:0; background:transparent; padding:13px 16px; font:inherit; font-weight:700; font-size:14px; color:var(--text-soft); cursor:pointer; white-space:nowrap; border-bottom:3px solid transparent; }
+.tab:hover{ color:var(--navy); }
+.tab.active{ color:var(--brand); border-bottom-color:var(--brand); background:var(--bg); }
+.tabpanel{ display:none; padding:18px; font-size:clamp(15px,2.1vw,17px); line-height:1.6; color:var(--text); }
+.tabpanel.active{ display:block; }
+
+/* Installations-Assistent */
+.wizard{ margin-top:22px; }
+.wzpanel{ display:none; border:1px solid var(--border); border-radius:var(--radius); background:var(--bg); box-shadow:var(--shadow); padding:28px 22px; text-align:center; }
+.wzpanel.active{ display:block; animation:fade .25s ease; }
+.wzpanel h3{ font-size:clamp(19px,3vw,24px); color:var(--navy); margin-bottom:12px; }
+.wzpanel p{ color:var(--text); font-size:clamp(15px,2.1vw,17px); max-width:620px; margin:0 auto; line-height:1.6; }
+.wzlabel{ display:inline-block; background:var(--brand); color:#fff; font-weight:800; font-size:13px; padding:5px 14px; border-radius:99px; margin-bottom:14px; }
+.wzbtn{ margin-top:16px; display:inline-flex; align-items:center; gap:8px; background:var(--brand); color:#fff; border:0; border-radius:99px; padding:12px 26px; font:inherit; font-weight:700; cursor:pointer; transition:background .15s; }
+.wzbtn:hover{ background:var(--brand-dark); }
+.wzbtn.wzrestart{ background:transparent; color:var(--brand); }
+.wzbtn.wzrestart:hover{ background:transparent; text-decoration:underline; }
+.wzdots{ display:none; justify-content:center; align-items:center; gap:8px; margin-top:16px; flex-wrap:wrap; }
+.wzdots.show{ display:flex; }
+.wzdot{ width:30px; height:30px; border-radius:50%; border:0; background:var(--surface); color:var(--text-soft); font:inherit; font-weight:700; font-size:13px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .15s,color .15s; }
+.wzdot:hover{ background:var(--border); }
+.wzdot.active{ background:var(--brand); color:#fff; }
+.wzdot svg{ width:15px; height:15px; }
+
+/* Galerie */
+.gallery{ margin-top:14px; display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+.gallery img{ width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:var(--radius-sm); display:block; background:var(--surface); }
+@media (min-width:680px){ .gallery{ grid-template-columns:repeat(4,1fr); } }
+
+/* Checklisten */
+.checkgroup{ margin-top:16px; border:1px solid var(--border); border-radius:var(--radius); padding:18px; }
+.checkgroup h2{ font-size:clamp(17px,2.6vw,21px); margin-bottom:4px; }
+.checkgroup .purpose{ font-size:14px; color:var(--text-soft); margin-bottom:14px; }
+.checklist{ list-style:none; display:flex; flex-direction:column; gap:11px; }
+.checklist li{ display:flex; gap:11px; align-items:flex-start; font-size:15px; line-height:1.5; color:var(--text); }
+.checklist li svg{ flex:0 0 auto; width:20px; height:20px; color:#1f9d55; margin-top:1px; }
+
 /* ===== Anweisungs-Listen (Kursanweisungen) ===== */
 .steps-list, .tips-list{ margin:4px 0 22px; padding-left:0; list-style:none; }
 .steps-list{ counter-reset:s; }
