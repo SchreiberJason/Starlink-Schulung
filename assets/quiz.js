@@ -160,7 +160,7 @@
       resBox.scrollIntoView({ behavior:"smooth", block:"center" });
 
       var canProceed = passed || !blockOnFail;
-      if(!canProceed) retryBtn.style.display = "";
+      if(!passed) retryBtn.style.display = "";   // bei falscher Antwort immer Wiederholung anbieten
       if(typeof onResult === "function") onResult(canProceed, { passed:passed, percent:percent, correct:correct, total:qs.length });
     });
 
