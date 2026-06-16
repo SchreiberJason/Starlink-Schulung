@@ -15,7 +15,7 @@
   "use strict";
 
   // Standard-Endpunkt (Google Apps Script). Pro Quiz via cfg.endpoint überschreibbar.
-  var DEFAULT_ENDPOINT = "https://script.google.com/macros/s/AKfycbwJnj_XXt99UN-mxhv0ld79nE1Z42A3TEC-X7wzYl9H9ZT1W6aUvG-gbPL5e1r8FM43/exec";
+  var DEFAULT_ENDPOINT = "https://script.google.com/macros/s/AKfycbxa7RycSSjL5gdwYdggADyb2YsNnRQwPoJOF9mEVXgBeUbSl4j-dCSbngUENjoIkzbmbQ/exec";
 
   var CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
   var CROSS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
