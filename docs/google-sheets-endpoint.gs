@@ -123,7 +123,9 @@ function saveCertificate_(data) {
   return jsonOut_({ ok: false, error: "WorkerUUID nicht gefunden: " + wu });
 }
 
-// Neue, vollständige WorkerUUIDs (in ALLEN Quiz-Tabs vorhanden) in den Techniker-Tab übernehmen.
+// WorkerUUIDs erst in den Techniker-Tab übernehmen, wenn der Techniker das GANZE Quiz
+// durch hat = ein BESTANDENER Versuch (Bestanden=ja) in JEDEM Quiz-Tab. Ein erster
+// oder fehlgeschlagener Versuch zählt NICHT (sonst stünde die UUID schon ab Beginn drin).
 // Nur die WorkerUUID wird gesetzt – den Namen ergänzt der Mensch, dann läuft der Prozess.
 function syncTechniker_() {
   var ss = ss_();
@@ -146,9 +148,19 @@ function syncTechniker_() {
     var h = v[0].map(function (x) { return String(x).trim().toLowerCase(); });
     var wc = h.indexOf("workeruuid");
     if (wc < 0) return;
+    var bc = h.indexOf("bestanden");
+    var pc = h.indexOf("prozent");
     counted++;
     var inThis = {};
-    for (var r = 1; r < v.length; r++) { var w = String(v[r][wc] || "").trim(); if (w) inThis[w] = true; }
+    for (var r = 1; r < v.length; r++) {
+      var w = String(v[r][wc] || "").trim();
+      if (!w) continue;
+      // nur ein BESTANDENER Versuch zählt als "Modul abgeschlossen"
+      var passed = (bc >= 0)
+        ? /^(ja|yes|true|bestanden)$/i.test(String(v[r][bc] || "").trim())
+        : (pc >= 0 ? parseFloat(v[r][pc]) >= 70 : false);
+      if (passed) inThis[w] = true;
+    }
     Object.keys(inThis).forEach(function (w) { seen[w] = (seen[w] || 0) + 1; });
   });
 
